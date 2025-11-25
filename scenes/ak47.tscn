@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx7snxgr51k50"]
+
+[ext_resource type="PackedScene" uid="uid://b4dmxkou072ci" path="res://assets/ak47/ak47.glb" id="1_sc5wr"]
+
+[node name="ak47" instance=ExtResource("1_sc5wr")]

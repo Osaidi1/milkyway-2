@@ -10,9 +10,11 @@ extends CharacterBody3D
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
+@onready var animations: AnimationPlayer = $Animations
 
 var speed := 0.0
 var time_bob := 0.0
+var is_crouching := false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -21,6 +23,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Jump
 	if event.is_action_pressed("jump"):
 		jump()
+	
+	# Crouch
+	if event.is_action_pressed("crouch"):
+		crouch()
 	
 	# Rotate Camera
 	if event is InputEventMouseMotion:
@@ -42,9 +48,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 4.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 4.0)
-		
-		
-		
+	
 	# Funcs
 	head_bob(delta)
 	
@@ -65,11 +69,19 @@ func fov(delta):
 	var target_fov = FOV + (speed / 2) * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 
+func crouch():
+	if is_crouching:
+		animations.play_backwards("crouch")
+	elif !is_crouching:
+		animations.play("crouch")
+	is_crouching = !is_crouching
+
 func change_speed():
 	if Input.is_action_pressed("run"):
 		speed = RUN_SPEED
 	else:
 		speed = WALK_SPEED
+	if is_crouching:
 
 func head_bob(delta) -> void:
 	time_bob += delta * velocity.length() * float(is_on_floor())
