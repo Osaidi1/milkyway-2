@@ -4,13 +4,14 @@ extends CharacterBody3D
 @export var RUN_SPEED := 6.0
 @export var JUMP_VELOCITY := 4.5
 @export var SENSITIVITY := 0.006
-@export var BOB_FREQUENCY := 1.75
-@export var BOB_DISTANCE := 0.08
+@export var BOB_FREQUENCY := 2
+@export var BOB_DISTANCE := 0.05
 @export var FOV := 75.0
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
 @onready var animations: AnimationPlayer = $Animations
+@onready var crouch_check: ShapeCast3D = $CrouchCheck
 
 var speed := 0.0
 var time_bob := 0.0
@@ -18,10 +19,11 @@ var is_crouching := false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	crouch_check.add_exception($".")
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Jump
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and !is_crouching:
 		jump()
 	
 	# Crouch
@@ -43,8 +45,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 		else:
-			velocity.x = 0.0
-			velocity.z = 0.0
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 4.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 4.0)
@@ -65,16 +67,18 @@ func add_gravity(delta) -> void:
 		velocity += get_gravity() * delta
 
 func fov(delta):
-	var velocity_clamped = clamp(velocity.length(), 0.5, RUN_SPEED * 2)
+	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z).length()
+	var velocity_clamped = clamp(horizontal_velocity, 0.5, RUN_SPEED * 2)
 	var target_fov = FOV + (speed / 2) * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 
 func crouch():
-	if is_crouching:
+	if is_crouching and !crouch_check.is_colliding():
 		animations.play_backwards("crouch")
+		is_crouching = !is_crouching
 	elif !is_crouching:
 		animations.play("crouch")
-	is_crouching = !is_crouching
+		is_crouching = !is_crouching
 
 func change_speed():
 	if Input.is_action_pressed("run"):
@@ -82,6 +86,7 @@ func change_speed():
 	else:
 		speed = WALK_SPEED
 	if is_crouching:
+		speed /= 3
 
 func head_bob(delta) -> void:
 	time_bob += delta * velocity.length() * float(is_on_floor())

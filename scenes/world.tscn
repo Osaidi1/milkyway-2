@@ -47,6 +47,12 @@ material_override = SubResource("StandardMaterial3D_e5uuo")
 use_collision = true
 size = Vector3(1, 0.0700684, 1)
 
+[node name="Floor2" type="CSGBox3D" parent="Playground"]
+transform = Transform3D(24.2422, 0, 0, 0, 1, 0, 0, 0, 24.2422, 8.64546, 1.34129, 3.28255)
+material_override = SubResource("StandardMaterial3D_e5uuo")
+use_collision = true
+size = Vector3(0.286743, 0.0700684, 0.333435)
+
 [node name="Wall1" type="CSGBox3D" parent="Playground"]
 transform = Transform3D(24.2422, 0, 0, 0, 2.67434, 0, 0, 0, 24.2422, -12.0649, 1.28266, 0)
 material_override = SubResource("StandardMaterial3D_nnsk1")
@@ -72,4 +78,4 @@ use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.572233, 1.03503, 0.0481191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751846, 1.03503, 0.0481191)
