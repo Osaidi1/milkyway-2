@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://dcl60ru3s3yi"]
+
+[ext_resource type="PackedScene" uid="uid://dklbd84f4ivst" path="res://weapons/ak47/ak47.glb" id="1_dkj8x"]
+[ext_resource type="Script" uid="uid://bmv7qxmdhhhar" path="res://scripts/weapon_resource.gd" id="2_v0p2e"]
+
+[resource]
+script = ExtResource("2_v0p2e")
+Name = &"ak47"
+ActivateAnimName = "ak47_activate"
+ShootAnimName = "ak47_shoot"
+ReloadAnimName = "ak47_reload"
+DeactivateAnimName = "ak47_deactivate"
+CurrentAmmo = 15
+StorageAmmo = 100
+Magazine = 15
+MaxAmmo = 300
+AutoFire = true
+Cooldown = 0.05
+Model = ExtResource("1_dkj8x")
+metadata/_custom_type_script = "uid://bmv7qxmdhhhar"

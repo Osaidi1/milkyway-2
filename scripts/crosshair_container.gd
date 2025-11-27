@@ -10,11 +10,10 @@ extends CenterContainer
 func _ready() -> void:
 	queue_redraw()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	adjust_lines()
 
 func _draw() -> void:
-	print("here")
 	draw_circle(Vector2(0, 0), RADIUS, COLOR)
 
 func adjust_lines() -> void:

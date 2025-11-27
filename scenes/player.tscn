@@ -1,11 +1,158 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkrvx17yiafo1"]
+[gd_scene load_steps=19 format=3 uid="uid://dkrvx17yiafo1"]
 
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://chcooamhovmko" path="res://scripts/weapon_manager.gd" id="2_tuyoq"]
+[ext_resource type="Script" uid="uid://bmv7qxmdhhhar" path="res://scripts/weapon_resource.gd" id="3_fjrip"]
+[ext_resource type="Resource" uid="uid://dgn3orf277cxy" path="res://weapons_templates/crowbar.tres" id="4_smehm"]
+[ext_resource type="PackedScene" uid="uid://u6ls81olvh3p" path="res://weapons/crowbar/crowbar.tscn" id="5_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://camib0cxx1h1y" path="res://weapons/ak47/ak_47.tscn" id="6_fjrip"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
+
+[sub_resource type="Animation" id="Animation_wrmxl"]
+resource_name = "crowbar_activate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crowbar:visible")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Crowbar:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.234864, -0.807319, -0.0968715), Vector3(0.234864, -0.319929, -0.303822)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crowbar:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.553269, 1.775, 0.855211), Vector3(0.0767945, 3.07178, -0.0959931)]
+}
+
+[sub_resource type="Animation" id="Animation_2pya7"]
+resource_name = "crowbar_deactivate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crowbar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Crowbar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.234864, -0.319929, -0.303822), Vector3(0.402616, -0.585097, -0.0423942)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crowbar:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.0767945, 3.07178, -0.0959931), Vector3(1.35774, 0.702257, -2.33381)]
+}
+
+[sub_resource type="Animation" id="Animation_dqblu"]
+resource_name = "crowbar_shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crowbar:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.234864, -0.319929, -0.303822), Vector3(0.235, -0.32, -0.884), Vector3(0.234864, -0.319929, -0.303822)]
+}
+
+[sub_resource type="Animation" id="Animation_8hw30"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crowbar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Crowbar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.234864, -0.319929, -0.303822)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crowbar:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0767945, 3.07178, -0.0959931)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hw30"]
+_data = {
+&"RESET": SubResource("Animation_8hw30"),
+&"crowbar_activate": SubResource("Animation_wrmxl"),
+&"crowbar_deactivate": SubResource("Animation_2pya7"),
+&"crowbar_shoot": SubResource("Animation_dqblu")
+}
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
@@ -108,6 +255,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
+
+[node name="Weapons" type="Node3D" parent="Head/Camera"]
+script = ExtResource("2_tuyoq")
+start_weapons = Array[ExtResource("3_fjrip")]([ExtResource("4_smehm")])
+
+[node name="Animations" type="AnimationPlayer" parent="Head/Camera/Weapons"]
+libraries = {
+&"": SubResource("AnimationLibrary_8hw30")
+}
+
+[node name="Crowbar" parent="Head/Camera/Weapons" instance=ExtResource("5_ur7pv")]
+transform = Transform3D(-0.993485, -0.0902853, 0.0695509, -0.0955633, 0.992463, -0.0767191, -0.0621001, -0.0828657, -0.994624, 0.234864, -0.319929, -0.303822)
+
+[node name="Ak47" parent="Head/Camera/Weapons" instance=ExtResource("6_fjrip")]
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Head/Camera")

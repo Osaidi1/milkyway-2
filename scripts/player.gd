@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var WALK_SPEED := 4.0
 @export var RUN_SPEED := 6.0
-@export var JUMP_VELOCITY := 4.5
+@export var JUMP_VELOCITY := 5
 @export var SENSITIVITY := 0.006
 @export var BOB_FREQUENCY := 2
 @export var BOB_DISTANCE := 0.05
