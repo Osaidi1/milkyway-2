@@ -1,5 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://u6ls81olvh3p"]
 
-[ext_resource type="PackedScene" uid="uid://dcl6x5kurbp2c" path="res://weapons/crowbar/model.gltf" id="1_fburu"]
+[ext_resource type="ArrayMesh" uid="uid://b0f1ooryktt6b" path="res://weapons/crowbar/crowbar.tres" id="1_fburu"]
 
-[node name="Sketchfab_Scene" instance=ExtResource("1_fburu")]
+[node name="Crowbar" type="MeshInstance3D"]
+transform = Transform3D(1.84475, 0, 0, 0, -2.14523e-07, 1.84475, 0, -1.84475, -2.14523e-07, 0, -2.92846e-07, 2.90027e-07)
+mesh = ExtResource("1_fburu")
+skeleton = NodePath("")

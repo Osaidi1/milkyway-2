@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://camib0cxx1h1y"]
+[gd_scene load_steps=13 format=4 uid="uid://camib0cxx1h1y"]
 
 [ext_resource type="Texture2D" uid="uid://3vtea5tx6538" path="res://weapons/ak47/ak47_akmat_1.png" id="1_iq8s0"]
+[ext_resource type="ArrayMesh" uid="uid://c6rmkugena3ki" path="res://weapons/ak47/ak47.tres" id="1_lgnxm"]
 [ext_resource type="Texture2D" uid="uid://bokjo5n5letr5" path="res://weapons/ak47/ak47_akmat.png" id="2_lgnxm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk624"]
@@ -25,7 +26,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_d3g37"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_iq8s0"]
 resource_name = "ak47_Cube_110"
 _surfaces = [{
 "aabb": AABB(-0.00735288, -0.0124269, -0.00226316, 0.0147058, 0.0248538, 0.00452632),
@@ -59,7 +60,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_op8q3"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lgnxm"]
 resource_name = "ak47_Cube_095"
 _surfaces = [{
 "aabb": AABB(0.0649651, -0.156259, -0.0113009, 0.119818, 0.150976, 0.0226019),
@@ -93,7 +94,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_rh8fr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2i8qv"]
 resource_name = "ak47_Cube_105"
 _surfaces = [{
 "aabb": AABB(-0.266244, -0.0760744, -0.0111429, 0.204952, 0.101085, 0.0222858),
@@ -127,7 +128,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_lepal"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tyk7s"]
 resource_name = "ak47_Cube_106"
 _surfaces = [{
 "aabb": AABB(-0.0670201, -0.098869, -0.0126437, 0.543801, 0.168213, 0.0252874),
@@ -146,63 +147,23 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_p83g6")
 
-[sub_resource type="Animation" id="Animation_iq8s0"]
-resource_name = "shoot"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.18, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.228544, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_lgnxm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2i8qv"]
-_data = {
-&"RESET": SubResource("Animation_lgnxm"),
-&"shoot": SubResource("Animation_iq8s0")
-}
-
-[node name="ak47" type="Node3D"]
+[node name="Gun" type="MeshInstance3D"]
+mesh = ExtResource("1_lgnxm")
+metadata/_edit_group_ = true
 
 [node name="Trigger" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148249, -0.0226215, 0)
-mesh = SubResource("ArrayMesh_d3g37")
+mesh = SubResource("ArrayMesh_iq8s0")
 skeleton = NodePath("")
 
 [node name="Magazine" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_op8q3")
+mesh = SubResource("ArrayMesh_lgnxm")
 skeleton = NodePath("")
 
 [node name="Back" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_rh8fr")
+mesh = SubResource("ArrayMesh_2i8qv")
 skeleton = NodePath("")
 
 [node name="Body" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_lepal")
+mesh = SubResource("ArrayMesh_tyk7s")
 skeleton = NodePath("")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_2i8qv")
-}
