@@ -7,7 +7,7 @@
 script = ExtResource("1_ngwdj")
 Name = &"ak47"
 position = Vector3(0.115, -0.09, -0.179)
-rotation = Vector3(-7.975, -92, 5.5)
+rotation = Vector3(-1.2, 83.8, 5.5)
 mesh_scene = ExtResource("1_k2led")
 shadow = true
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"
