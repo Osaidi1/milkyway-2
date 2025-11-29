@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://dvf14lmq64upv"]
 
-[ext_resource type="ArrayMesh" uid="uid://c6rmkugena3ki" path="res://weapons/ak47/ak47.tres" id="1_k2led"]
+[ext_resource type="ArrayMesh" uid="uid://pprq0oanfwnl" path="res://weapons/ak47/ak47.tres" id="1_k2led"]
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_ngwdj"]
 
 [resource]
 script = ExtResource("1_ngwdj")
 Name = &"ak47"
-position = Vector3(0.2, -0.3, -0.3)
-rotation = Vector3(0, 0, 0)
+position = Vector3(0.115, -0.09, -0.179)
+rotation = Vector3(-7.975, -92, 5.5)
 mesh_scene = ExtResource("1_k2led")
 shadow = true
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

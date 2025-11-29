@@ -99,6 +99,7 @@ _data = {
 script = ExtResource("1_3vyb7")
 
 [node name="Shape" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_u8vuu")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
@@ -111,6 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
 transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
 
 [node name="Weapons" parent="Head/Camera" instance=ExtResource("2_qhqgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Head/Camera")

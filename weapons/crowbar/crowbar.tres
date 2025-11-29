@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=6 format=4 uid="uid://b0f1ooryktt6b"]
+[gd_resource type="ArrayMesh" load_steps=6 format=4 uid="uid://cx5hxheqse8m5"]
 
 [ext_resource type="Texture2D" uid="uid://blorcxruxbc0f" path="res://weapons/crowbar/textures/DefaultMaterial_baseColor.jpeg" id="1_uxoj6"]
 [ext_resource type="Texture2D" uid="uid://c4dm70pdw5sa2" path="res://weapons/crowbar/textures/DefaultMaterial_metallicRoughness.png" id="2_eihv0"]

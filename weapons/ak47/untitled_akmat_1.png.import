@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vtea5tx6538"
-path.s3tc="res://.godot/imported/ak47_akmat_1.png-e2cefa42c4215542407c4ab77f6a441f.s3tc.ctex"
+uid="uid://bwhe71wlpvl3c"
+path.s3tc="res://.godot/imported/untitled_akmat_1.png-7fcaa2206b55ee19451e0e91877ff278.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://weapons/ak47/ak47_akmat_1.png"
-dest_files=["res://.godot/imported/ak47_akmat_1.png-e2cefa42c4215542407c4ab77f6a441f.s3tc.ctex"]
+source_file="res://weapons/ak47/untitled_akmat_1.png"
+dest_files=["res://.godot/imported/untitled_akmat_1.png-7fcaa2206b55ee19451e0e91877ff278.s3tc.ctex"]
 
 [params]
 

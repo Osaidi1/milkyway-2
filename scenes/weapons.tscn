@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxm16fl2emhyy"]
+[gd_scene load_steps=4 format=3 uid="uid://dxm16fl2emhyy"]
 
 [ext_resource type="Script" uid="uid://6p1qgjqqks07" path="res://scripts/weapons_manager.gd" id="1_rvi01"]
 [ext_resource type="Resource" uid="uid://dvf14lmq64upv" path="res://weapon_resource/ak47.tres" id="2_wfppc"]
+[ext_resource type="ArrayMesh" uid="uid://pprq0oanfwnl" path="res://weapons/ak47/ak47.tres" id="3_ka8gl"]
 
 [node name="Weapons" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0.105, -0.57)
 script = ExtResource("1_rvi01")
 weapon = ExtResource("2_wfppc")
 
 [node name="Model" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_ka8gl")
