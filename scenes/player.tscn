@@ -115,6 +115,8 @@ transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431
 [node name="Weapons" parent="Head/Camera" instance=ExtResource("2_qhqgy")]
 transform = Transform3D(-0.999501, -0.0315207, -0.00174993, -0.00568549, 0.125204, 0.992115, -0.0310531, 0.99163, -0.125321, 0.16, -0.16, -0.21)
 mesh = ExtResource("3_dqkch")
+sway_speed = null
+reset = null
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Head/Camera")
