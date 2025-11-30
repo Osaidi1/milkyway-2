@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dcl6x5kurbp2c"
-path="res://.godot/imported/model.gltf-f1f1eef8e295b25c40f71d94f66b8176.scn"
+uid="uid://dkfcg4m06wbj2"
+path="res://.godot/imported/untitled.glb-cb7aee797019f72d5256ba02fb90c2c5.scn"
 
 [deps]
 
-source_file="res://weapons/crowbar/model.gltf"
-dest_files=["res://.godot/imported/model.gltf-f1f1eef8e295b25c40f71d94f66b8176.scn"]
+source_file="res://weapons/ak47/things/untitled.glb"
+dest_files=["res://.godot/imported/untitled.glb-cb7aee797019f72d5256ba02fb90c2c5.scn"]
 
 [params]
 

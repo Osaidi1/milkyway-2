@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dselk12t02d2y"]
-
-[ext_resource type="PackedScene" uid="uid://dcl6x5kurbp2c" path="res://weapons/crowbar/model.gltf" id="1_ulcgi"]
-
-[node name="Sketchfab_Scene" instance=ExtResource("1_ulcgi")]

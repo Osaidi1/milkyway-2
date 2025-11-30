@@ -1,14 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxm16fl2emhyy"]
+[gd_scene load_steps=3 format=3 uid="uid://dxm16fl2emhyy"]
 
 [ext_resource type="Script" uid="uid://6p1qgjqqks07" path="res://scripts/weapons_manager.gd" id="1_rvi01"]
 [ext_resource type="Resource" uid="uid://crd8fagmjjg68" path="res://weapon_resource/crowbar.tres" id="2_ka8gl"]
-[ext_resource type="ArrayMesh" uid="uid://dml6shsasvta1" path="res://weapons/crowbar/crowbar.tres" id="3_pe4jq"]
 
-[node name="Weapons" type="Node3D"]
-transform = Transform3D(-0.992269, 0.102792, 0.0695414, 0.0972821, 0.992159, -0.0784591, -0.0770612, -0.0710874, -0.994489, 0.215, -0.313, -0.33)
+[node name="Weapons" type="MeshInstance3D"]
 script = ExtResource("1_rvi01")
 weapon = ExtResource("2_ka8gl")
-
-[node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.992027, 0.0793897, 0.0978763, 0.0981531, 0.000418852, -0.995171, -0.0790475, 0.996843, -0.00737682, -0.177396, 0.114469, 0.0973315)
-mesh = ExtResource("3_pe4jq")

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blorcxruxbc0f"
-path.s3tc="res://.godot/imported/DefaultMaterial_baseColor.jpeg-03f17d85655e78bd835f95ca2e24f1a4.s3tc.ctex"
+uid="uid://kqxek2p4twpl"
+path.s3tc="res://.godot/imported/DefaultMaterial_metallicRoughness.png-a64f1e6e4349d022572c139105a8e7cd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://weapons/crowbar/textures/DefaultMaterial_baseColor.jpeg"
-dest_files=["res://.godot/imported/DefaultMaterial_baseColor.jpeg-03f17d85655e78bd835f95ca2e24f1a4.s3tc.ctex"]
+source_file="res://weapons/crowbar/things/textures/DefaultMaterial_metallicRoughness.png"
+dest_files=["res://.godot/imported/DefaultMaterial_metallicRoughness.png-a64f1e6e4349d022572c139105a8e7cd.s3tc.ctex"]
 
 [params]
 
@@ -24,8 +24,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=8
+roughness/src_normal="res://weapons/crowbar/things/textures/DefaultMaterial_normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

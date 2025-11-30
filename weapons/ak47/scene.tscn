@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d15vsex1omeou"]
-
-[ext_resource type="PackedScene" uid="uid://d0vlvf7oxdiq6" path="res://weapons/ak47/untitled.glb" id="1_rgoc7"]
-
-[node name="untitled" instance=ExtResource("1_rgoc7")]

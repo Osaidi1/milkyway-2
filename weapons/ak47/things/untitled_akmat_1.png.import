@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp4tkchqe7nj"
-path.s3tc="res://.godot/imported/untitled_akmat.png-9bf64614c71b9808cf0ffc12eaab3a9f.s3tc.ctex"
+uid="uid://c3qavntaqer6v"
+path.s3tc="res://.godot/imported/untitled_akmat_1.png-b1ae94d778c2e873499018e651d6a0ae.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d905f38ec4ac852eb5ba8087f357aa28"
+"md5": "fe95ba70898b55b9bb26cf83aa3c0341"
 }
 
 [deps]
 
-source_file="res://weapons/ak47/untitled_akmat.png"
-dest_files=["res://.godot/imported/untitled_akmat.png-9bf64614c71b9808cf0ffc12eaab3a9f.s3tc.ctex"]
+source_file="res://weapons/ak47/things/untitled_akmat_1.png"
+dest_files=["res://.godot/imported/untitled_akmat_1.png-b1ae94d778c2e873499018e651d6a0ae.s3tc.ctex"]
 
 [params]
 
@@ -23,12 +23,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://weapons/ak47/untitled_akmat.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

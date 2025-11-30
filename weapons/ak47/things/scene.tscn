@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://casghs43rt54f"]
+
+[ext_resource type="ArrayMesh" uid="uid://bn7lltmcu1rkl" path="res://weapons/ak47/ak47.tres" id="1_uxqd7"]
+
+[node name="ak47" type="MeshInstance3D"]
+mesh = ExtResource("1_uxqd7")
+skeleton = NodePath("")
