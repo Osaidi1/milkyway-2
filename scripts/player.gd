@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export_category("Player")
 @export var WALK_SPEED := 4.0
 @export var RUN_SPEED := 6.0
 @export var JUMP_VELOCITY := 5
@@ -7,6 +8,10 @@ extends CharacterBody3D
 @export var BOB_FREQUENCY := 2
 @export var BOB_DISTANCE := 0.05
 @export var FOV := 75.0
+@export_category("Weapon")
+@export var WEAPON_BOB_SPEED := 5
+@export var WEAPON_BOB_H := 1
+@export var WEAPON_BOB_V := 4
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
@@ -43,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
-			weapons.weapon_bob(delta, 5.0, 0.01,0.02)
+			weapons.weapon_bob(delta, WEAPON_BOB_SPEED, WEAPON_BOB_H * (speed / 1.5), WEAPON_BOB_V)
 			weapons.weapon_sway(delta, false)
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed

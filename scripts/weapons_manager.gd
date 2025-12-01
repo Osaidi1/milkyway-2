@@ -78,7 +78,7 @@ func weapon_sway(delta, is_idle: bool) -> void:
 	else:
 		#Camera Sway
 		position.x = lerp(position.x, weapon.position.x - (mouse_movement.x * weapon.camera_amount_position + weapon_bob_amount.x) * delta, weapon.camera_speed_position)
-		position.y = lerp(position.y, weapon.position.y + (mouse_movement.y * weapon.camera_amount_position + weapon_bob_amount.y) * delta, weapon.camera_speed_position)
+		position.y = lerp(position.y, weapon.position.y + (mouse_movement.y * weapon.camera_amount_position + weapon_bob_amount.y) * delta, weapon.camera_speed_position) - (delta / 5)
 		rotation_degrees.y = lerp(rotation_degrees.y, weapon.rotation.y + (mouse_movement.x * weapon.camera_amount_rotation) * delta, weapon.camera_speed_rotation)
 		rotation_degrees.x = lerp(rotation_degrees.x, weapon.rotation.x - (mouse_movement.y * weapon.camera_amount_rotation) * delta, weapon.camera_speed_rotation)
 
