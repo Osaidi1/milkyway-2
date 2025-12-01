@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
-[ext_resource type="ArrayMesh" uid="uid://bn7lltmcu1rkl" path="res://weapons/ak47/ak47.tres" id="3_qlg0r"]
-[ext_resource type="Resource" uid="uid://dvf14lmq64upv" path="res://weapon_resource/ak47.tres" id="4_tuyoq"]
+[ext_resource type="ArrayMesh" uid="uid://6c088myoio40" path="res://weapons/crowbar/crowbar.tres" id="3_dqkch"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dqkch"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
@@ -114,10 +115,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
 transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
 
 [node name="Weapons" parent="Head/Camera" instance=ExtResource("2_qhqgy")]
-transform = Transform3D(-0.0925503, -0.117217, 0.988785, 0.103687, 0.986513, 0.126653, -0.990294, 0.114246, -0.0791483, 0.112116, -0.116754, -0.149)
-mesh = ExtResource("3_qlg0r")
-weapon = ExtResource("4_tuyoq")
-sway_speed = 1.0
+transform = Transform3D(-0.999501, -0.0315207, -0.00174993, -0.00568549, 0.125204, 0.992115, -0.0310531, 0.99163, -0.125321, 0.16, -0.16, -0.21)
+mesh = ExtResource("3_dqkch")
+sway_noise = SubResource("NoiseTexture2D_dqkch")
+sway_speed = null
+reset = null
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Head/Camera")

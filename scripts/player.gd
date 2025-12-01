@@ -12,6 +12,7 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $Head/Camera
 @onready var animations: AnimationPlayer = $Animations
 @onready var crouch_check: ShapeCast3D = $CrouchCheck
+@onready var weapons: MeshInstance3D = $Head/Camera/Weapons
 
 var speed := 0.0
 var time_bob := 0.0
@@ -42,14 +43,20 @@ func _physics_process(delta: float) -> void:
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
+			weapons.weapon_bob(delta, 5.0, 0.01,0.02)
+			weapons.weapon_sway(delta, false)
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 		else:
+			weapons.weapon_sway(delta, true)
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
 	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 4.0)
+		weapons.weapon_sway(delta, true)
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * 5.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 4.0)
+	if velocity != Vector3(0, 0, 0):
+		weapons.weapon_bob(delta, 2.0, 0.01, 0.025)
 	
 	# Funcs
 	head_bob(delta)
@@ -66,13 +73,16 @@ func add_gravity(delta) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-func fov(delta):
+func fov(delta) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z).length()
 	var velocity_clamped = clamp(horizontal_velocity, 0.5, RUN_SPEED * 2)
 	var target_fov = FOV + (speed / 2) * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	if is_crouching:
+		target_fov *= 0.7
+	camera.fov = lerp(camera.fov, target_fov, delta)
 
-func crouch():
+func crouch() -> void:
 	if is_crouching and !crouch_check.is_colliding():
 		animations.play_backwards("crouch")
 		is_crouching = !is_crouching
@@ -80,7 +90,7 @@ func crouch():
 		animations.play("crouch")
 		is_crouching = !is_crouching
 
-func change_speed():
+func change_speed() -> void:
 	if Input.is_action_pressed("run"):
 		speed = RUN_SPEED
 	else:

@@ -6,16 +6,16 @@
 [resource]
 script = ExtResource("1_ngwdj")
 Name = &"ak47"
-position = Vector3(0.125, -0.125, -0.179)
-rotation = Vector3(-2.7, 93.8, 6)
+position = Vector3(0.11, -0.115, -0.149)
+rotation = Vector3(-2.7, 90, 6)
 camera_min = Vector2(-20, -20)
 camera_max = Vector2(20, 20)
 camera_speed_position = 0.07
 camera_speed_rotation = 0.1
-camera_amount_position = 0.1
-camera_amount_rotation = 30.0
-idle_amount = 10.0
-idle_strength = 150.0
-idle_random_amount = 5.0
+camera_amount_position = 0.05
+camera_amount_rotation = 21.1
+idle_amount = 35.0
+idle_strength = 250.0
+idle_random_amount = 2.5
 mesh_scene = ExtResource("1_k2led")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"
