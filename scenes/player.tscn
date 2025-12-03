@@ -114,7 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
 transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
 
 [node name="Weapons" parent="Head/Camera" instance=ExtResource("2_qhqgy")]
-transform = Transform3D(-0.0925503, -0.117217, 0.988785, 0.103687, 0.986513, 0.126653, -0.990294, 0.114246, -0.0791483, 0.112116, -0.116754, -0.149)
+transform = Transform3D(-0.00492401, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994521, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
 mesh = ExtResource("3_qlg0r")
 weapon = ExtResource("4_tuyoq")
 sway_speed = 1.0

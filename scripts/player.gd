@@ -9,7 +9,6 @@ extends CharacterBody3D
 @export var BOB_DISTANCE := 0.05
 @export var FOV := 75.0
 @export_category("Weapon")
-@export var WEAPON_BOB_SPEED := 5
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
 
@@ -36,11 +35,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("crouch"):
 		crouch()
 	
+	# Shoot
+	if event.is_action_pressed("shoot"):
+		shoot()
+	
 	# Rotate Camera
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-50), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70), deg_to_rad(60))
 
 func _physics_process(delta: float) -> void:
 	# Handle Movement
@@ -48,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
-			weapons.weapon_bob(delta, WEAPON_BOB_SPEED, WEAPON_BOB_H * (speed / 1.5), WEAPON_BOB_V)
+			weapons.weapon_bob(delta, speed, WEAPON_BOB_H * (speed / 1.5), WEAPON_BOB_V)
 			weapons.weapon_sway(delta, false)
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -107,9 +110,12 @@ func head_bob(delta) -> void:
 	time_bob += delta * velocity.length() * float(is_on_floor())
 	var pos = Vector3.ZERO
 	pos.y = sin(time_bob * BOB_FREQUENCY) * BOB_DISTANCE
-	pos.x = cos(time_bob * BOB_FREQUENCY / 2) * BOB_DISTANCE
+	pos.x = abs(sin(time_bob * BOB_FREQUENCY / 2) * BOB_DISTANCE)
 	camera.transform.origin = pos
 
 func jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+
+func shoot() -> void:
+	weapons.attack()

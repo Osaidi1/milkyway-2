@@ -25,6 +25,7 @@ var time := 0.0
 var idle_sway_adjustment
 var idle_sway_rotation_strength
 var weapon_bob_amount: Vector2 = Vector2.ZERO
+var bullet = preload("res://small_but_mighty/bullet_decal.tscn")
 
 func _ready() -> void:
 	await owner.ready
@@ -88,3 +89,33 @@ func weapon_bob(delta, bob_speed: float, hbob_amount:float, vbob_amount:float) -
 	time += delta
 	weapon_bob_amount.x = sin(time * bob_speed) * hbob_amount
 	weapon_bob_amount.y = abs(cos(time * bob_speed) * vbob_amount)
+
+func attack() -> void:
+	var camera = $".."
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	screen_center.x += 1
+	screen_center.y += 1
+	var origin = camera.project_ray_origin(screen_center)
+	var end = origin + camera.project_ray_normal(screen_center) * 1000
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	if result:
+		bullet_damage(result.get("position"), result.get("normal"))
+
+func bullet_damage(pos: Vector3, normal: Vector3) -> void:
+	var instance = bullet.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = pos
+	instance.look_at(instance.global_transform.origin, Vector3.UP)
+	if normal != Vector3.UP and normal != Vector3.DOWN and normal != Vector3.FORWARD and normal != Vector3.BACK:
+		instance.rotate_object_local(Vector3(1,0,0), 90)
+	if normal == Vector3.BACK and normal == Vector3.FORWARD:
+		instance.rotate_object_local(Vector3(0,1,0), -90)
+	# One side isnt working, fix it
+	await get_tree().create_timer(3).timeout
+	var fade = get_tree().create_tween()
+	fade.tween_property(instance, "modulate:a", 0, 1)
+	await get_tree().create_timer(1.5).timeout
+	instance.queue_free()
