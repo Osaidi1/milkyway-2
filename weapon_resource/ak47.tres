@@ -23,5 +23,6 @@ rotate_speed = 10.0
 position_recoil_amount = Vector3(0.01, 0.01, 0.1)
 position_snap = 20.0
 position_speed = 10.0
+flash_time = 0.2
 mesh_scene = ExtResource("1_k2led")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

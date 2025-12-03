@@ -23,5 +23,7 @@ extends Resource
 @export var position_recoil_amount: Vector3
 @export var position_snap: float
 @export var position_speed: float
+@export_category("Muzzle Flash")
+@export var flash_time := 0.85
 @export_category("Visuals")
 @export var mesh_scene: Mesh

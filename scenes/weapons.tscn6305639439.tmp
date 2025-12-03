@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxm16fl2emhyy"]
 
-[ext_resource type="ArrayMesh" uid="uid://bn7lltmcu1rkl" path="res://weapons/ak47/ak47.tres" id="1_pe4jq"]
+[ext_resource type="ArrayMesh" uid="uid://6c088myoio40" path="res://weapons/crowbar/crowbar.tres" id="1_ka8gl"]
 [ext_resource type="Script" uid="uid://6p1qgjqqks07" path="res://scripts/weapons_manager.gd" id="1_rvi01"]
-[ext_resource type="Resource" uid="uid://dvf14lmq64upv" path="res://weapon_resource/ak47.tres" id="3_0ccn8"]
+[ext_resource type="Resource" uid="uid://crd8fagmjjg68" path="res://weapon_resource/crowbar.tres" id="2_ka8gl"]
 [ext_resource type="Script" uid="uid://c6amx1rcw6jsu" path="res://scripts/muzzle_flash.gd" id="4_pe4jq"]
 
 [node name="Weapons" type="MeshInstance3D"]
-transform = Transform3D(-0.00492401, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994522, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
-mesh = ExtResource("1_pe4jq")
+transform = Transform3D(-0.999502, -0.0315207, -0.00174993, -0.00568549, 0.125204, 0.992115, -0.0310531, 0.99163, -0.125321, 0.16, -0.16, -0.21)
+mesh = ExtResource("1_ka8gl")
 script = ExtResource("1_rvi01")
-weapon = ExtResource("3_0ccn8")
+weapon = ExtResource("2_ka8gl")
 
 [node name="Muzzle Flash" type="Node3D" parent="." node_paths=PackedStringArray("weapon", "particles", "light")]
 script = ExtResource("4_pe4jq")
@@ -21,5 +21,3 @@ light = NodePath("Flash")
 
 [node name="Flash" type="OmniLight3D" parent="Muzzle Flash"]
 visible = false
-light_energy = 2.0
-omni_range = 10.0
