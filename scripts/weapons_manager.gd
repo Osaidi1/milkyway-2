@@ -2,12 +2,14 @@
 
 extends Node3D
 
+signal weapon_fired
+
 @export var weapon: weapons_resource:
 	set(value):
 		weapon = value
 		if Engine.is_editor_hint():
 			load_weapon()
-@export var sway_noise: FastNoiseLite
+
 @export var sway_speed := 1.2
 @export var reset := false:
 	set(value):
@@ -15,8 +17,9 @@ extends Node3D
 		if Engine.is_editor_hint():
 			load_weapon()
 
-@onready var player: CharacterBody3D = $"../../.."
+@onready var player: CharacterBody3D = $"../../../../.."
 
+var sway_noise: FastNoiseLite
 var mouse_movement: Vector2
 var random_sway_x: float
 var random_sway_y: float
@@ -91,7 +94,8 @@ func weapon_bob(delta, bob_speed: float, hbob_amount:float, vbob_amount:float) -
 	weapon_bob_amount.y = abs(cos(time * bob_speed) * vbob_amount)
 
 func attack() -> void:
-	var camera = $".."
+	weapon_fired.emit()
+	var camera = $"../.."
 	var space_state = camera.get_world_3d().direct_space_state
 	var screen_center = get_viewport().size / 2
 	screen_center.x += 1
@@ -108,12 +112,8 @@ func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	var instance = bullet.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = pos
-	instance.look_at(instance.global_transform.origin, Vector3.UP)
-	if normal != Vector3.UP and normal != Vector3.DOWN and normal != Vector3.FORWARD and normal != Vector3.BACK:
-		instance.rotate_object_local(Vector3(1,0,0), 90)
-	if normal == Vector3.BACK and normal == Vector3.FORWARD:
-		instance.rotate_object_local(Vector3(0,1,0), -90)
-	# One side isnt working, fix it
+	instance.look_at(pos + normal, Vector3.UP)
+	instance.rotate_object_local(Vector3.RIGHT, deg_to_rad(90))
 	await get_tree().create_timer(3).timeout
 	var fade = get_tree().create_tween()
 	fade.tween_property(instance, "modulate:a", 0, 1)

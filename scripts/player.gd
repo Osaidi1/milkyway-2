@@ -13,10 +13,10 @@ extends CharacterBody3D
 @export var WEAPON_BOB_V := 4
 
 @onready var head: Node3D = $Head
-@onready var camera: Camera3D = $Head/Camera
+@onready var camera: Camera3D = $Head/Recoil/Camera
 @onready var animations: AnimationPlayer = $Animations
 @onready var crouch_check: ShapeCast3D = $CrouchCheck
-@onready var weapons: MeshInstance3D = $Head/Camera/Weapons
+@onready var weapons: MeshInstance3D = $Head/Recoil/Camera/RecoilPosition/Weapons
 
 var speed := 0.0
 var time_bob := 0.0

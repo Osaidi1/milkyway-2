@@ -16,5 +16,12 @@ extends Resource
 @export var idle_amount := 10.0
 @export var idle_strength := 300.0
 @export_range(0.1, 10.0, 0.1) var idle_random_amount := 5.0
+@export_category("Recoil")
+@export var rotate_recoil_amount: Vector3
+@export var rotate_snap: float
+@export var rotate_speed: float
+@export var position_recoil_amount: Vector3
+@export var position_snap: float
+@export var position_speed: float
 @export_category("Visuals")
 @export var mesh_scene: Mesh
