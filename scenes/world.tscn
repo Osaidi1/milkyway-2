@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4aremvvkmjl8"]
+[gd_scene load_steps=11 format=3 uid="uid://b4aremvvkmjl8"]
 
 [ext_resource type="PackedScene" uid="uid://dkrvx17yiafo1" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://rufxbr1dv5eg" path="res://scripts/interaction.gd" id="1_rwgxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5uuo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -70,6 +71,26 @@ transform = Transform3D(-1.05966e-06, 0, 24.2422, 0, 2.67434, 0, -24.2422, 0, -1
 material_override = SubResource("StandardMaterial3D_k0juu")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
+
+[node name="interactable" type="Node" parent="Playground/Wall4"]
+script = ExtResource("1_rwgxs")
+metadata/_custom_type_script = "uid://rufxbr1dv5eg"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Playground/Wall4/interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11186, 2.58976)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Playground/Wall4/interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.204434, 3.53735)
+use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Playground/Wall4/interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543499, 4.49506)
+use_collision = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Playground/Wall4/interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.872951, 5.47416)
+use_collision = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)

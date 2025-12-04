@@ -12,6 +12,8 @@ extends CharacterBody3D
 @export_category("Weapon")
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
+@export_category("Refrences")
+@export var step_handler: stair_handler
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Recoil/Camera
@@ -84,6 +86,8 @@ func _physics_process(delta: float) -> void:
 	interact_cast()
 	
 	move_and_slide()
+	
+	step_handler.handle_step_climbing()
 
 func add_gravity(delta) -> void:
 	if not is_on_floor():
@@ -129,8 +133,8 @@ func shoot() -> void:
 	weapons.attack()
 
 func interact():
-	if interact_cast_result != null:
-		print(interact_cast_result)
+	if interact_cast_result and interact_cast_result.has_user_signal("interacting"):
+		interact_cast_result.emit_signal("interacting")
 
 func interact_cast():
 	var space_state = camera.get_world_3d().direct_space_state
@@ -143,4 +147,9 @@ func interact_cast():
 	query.collide_with_bodies = true
 	var result = space_state.intersect_ray(query)
 	var current_cast_result = result.get("collider")
+	if current_cast_result != interact_cast_result:
+		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
+			interact_cast_result.emit_signal("unfocused")
+		if current_cast_result and current_cast_result.has_user_signal("focused"):
+			current_cast_result.emit_signal("focused")
 	interact_cast_result = current_cast_result
