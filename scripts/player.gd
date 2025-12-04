@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var BOB_FREQUENCY := 2
 @export var BOB_DISTANCE := 0.05
 @export var FOV := 75.0
+@export var INTERACT_DISTANCE := 2.0
 @export_category("Weapon")
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
@@ -21,10 +22,15 @@ extends CharacterBody3D
 var speed := 0.0
 var time_bob := 0.0
 var is_crouching := false
+var interact_cast_result
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crouch_check.add_exception($".")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		interact()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Jump
@@ -71,9 +77,11 @@ func _physics_process(delta: float) -> void:
 	
 	fov(delta)
 	
+	add_gravity(delta)
+	
 	change_speed()
 	
-	add_gravity(delta)
+	interact_cast()
 	
 	move_and_slide()
 
@@ -119,3 +127,20 @@ func jump() -> void:
 
 func shoot() -> void:
 	weapons.attack()
+
+func interact():
+	if interact_cast_result != null:
+		print(interact_cast_result)
+
+func interact_cast():
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	screen_center.x += 1
+	screen_center.y += 1
+	var origin = camera.project_ray_origin(screen_center)
+	var end = origin + camera.project_ray_normal(screen_center) * INTERACT_DISTANCE
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	var current_cast_result = result.get("collider")
+	interact_cast_result = current_cast_result

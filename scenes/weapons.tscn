@@ -1,9 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxm16fl2emhyy"]
+[gd_scene load_steps=10 format=3 uid="uid://dxm16fl2emhyy"]
 
 [ext_resource type="ArrayMesh" uid="uid://bn7lltmcu1rkl" path="res://weapons/ak47/ak47.tres" id="1_pe4jq"]
 [ext_resource type="Script" uid="uid://6p1qgjqqks07" path="res://scripts/weapons_manager.gd" id="1_rvi01"]
 [ext_resource type="Resource" uid="uid://dvf14lmq64upv" path="res://weapon_resource/ak47.tres" id="3_0ccn8"]
 [ext_resource type="Script" uid="uid://c6amx1rcw6jsu" path="res://scripts/muzzle_flash.gd" id="4_pe4jq"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pe4jq"]
+angle_min = -73.0
+angle_max = 73.0
+initial_velocity_min = 0.05
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_pe4jq"]
+colors = PackedColorArray(1, 0.492188, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ccn8"]
+gradient = SubResource("Gradient_pe4jq")
+fill = 2
+fill_from = Vector2(0.5, 0.518018)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ccn8"]
+transparency = 1
+blend_mode = 1
+albedo_texture = SubResource("GradientTexture2D_0ccn8")
+roughness = 0.0
+emission_enabled = true
+emission_energy_multiplier = 10.0
+emission_texture = SubResource("GradientTexture2D_0ccn8")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_oqpq1"]
+material = SubResource("StandardMaterial3D_0ccn8")
+size = Vector2(0.05, 0.05)
 
 [node name="Weapons" type="MeshInstance3D"]
 transform = Transform3D(-0.00492401, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994522, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
@@ -18,8 +50,18 @@ particles = NodePath("Flame")
 light = NodePath("Flash")
 
 [node name="Flame" type="GPUParticles3D" parent="Muzzle Flash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.494802, 0.0284727, -5.20113e-10)
+emitting = false
+amount = 10
+lifetime = 0.04
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_pe4jq")
+draw_pass_1 = SubResource("QuadMesh_oqpq1")
 
 [node name="Flash" type="OmniLight3D" parent="Muzzle Flash"]
+transform = Transform3D(1, -2.98023e-08, 3.13301e-09, 3.72529e-08, 1, -4.92993e-09, -4.43074e-09, -8.50148e-10, 1, 0.541821, 0.0179768, 0)
 visible = false
-light_energy = 2.0
+light_color = Color(0.901961, 0.682353, 0.243137, 1)
+light_energy = 3.0
 omni_range = 10.0

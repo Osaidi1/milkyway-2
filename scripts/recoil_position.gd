@@ -12,12 +12,12 @@ func _ready() -> void:
 	weapon.weapon_fired.connect(add_recoil)
 
 func _process(delta: float) -> void:
-	recoil_amount = weapon.weapon.position_recoil_amount
-	snap_amount = weapon.weapon.position_snap
-	speed = weapon.weapon.position_speed
 	target_position = lerp(target_position, Vector3.ZERO, speed * delta)
 	current_position = lerp(current_position, target_position, snap_amount * delta)
 	position = current_position
 
 func add_recoil() -> void:
+	recoil_amount = weapon.weapon.position_recoil_amount
+	snap_amount = weapon.weapon.position_snap
+	speed = weapon.weapon.position_speed
 	target_position += Vector3(randf_range(recoil_amount.x, recoil_amount.x * 2.0), randf_range(-recoil_amount.y, recoil_amount.y), randf_range(recoil_amount.z, recoil_amount.z * 2.0))

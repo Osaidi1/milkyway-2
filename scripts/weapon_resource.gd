@@ -2,6 +2,8 @@ class_name weapons_resource
 extends Resource
 
 @export var Name: StringName
+@export_category("Data")
+@export var meele := false
 @export_category("Orientation")
 @export var position: Vector3
 @export var rotation: Vector3
@@ -25,5 +27,6 @@ extends Resource
 @export var position_speed: float
 @export_category("Muzzle Flash")
 @export var flash_time := 0.85
+@export var muzzle_position := Vector3(0,0,0) 
 @export_category("Visuals")
 @export var mesh_scene: Mesh

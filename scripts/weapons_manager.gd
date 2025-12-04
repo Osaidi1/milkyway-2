@@ -94,19 +94,20 @@ func weapon_bob(delta, bob_speed: float, hbob_amount:float, vbob_amount:float) -
 	weapon_bob_amount.y = abs(cos(time * bob_speed) * vbob_amount)
 
 func attack() -> void:
-	weapon_fired.emit()
-	var camera = $"../.."
-	var space_state = camera.get_world_3d().direct_space_state
-	var screen_center = get_viewport().size / 2
-	screen_center.x += 1
-	screen_center.y += 1
-	var origin = camera.project_ray_origin(screen_center)
-	var end = origin + camera.project_ray_normal(screen_center) * 1000
-	var query = PhysicsRayQueryParameters3D.create(origin, end)
-	query.collide_with_bodies = true
-	var result = space_state.intersect_ray(query)
-	if result:
-		bullet_damage(result.get("position"), result.get("normal"))
+	if !weapon.meele:
+		weapon_fired.emit()
+		var camera = $"../.."
+		var space_state = camera.get_world_3d().direct_space_state
+		var screen_center = get_viewport().size / 2
+		screen_center.x += 1
+		screen_center.y += 1
+		var origin = camera.project_ray_origin(screen_center)
+		var end = origin + camera.project_ray_normal(screen_center) * 1000
+		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		query.collide_with_bodies = true
+		var result = space_state.intersect_ray(query)
+		if result:
+			bullet_damage(result.get("position"), result.get("normal"))
 
 func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	var instance = bullet.instantiate()
