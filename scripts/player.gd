@@ -9,11 +9,14 @@ extends CharacterBody3D
 @export var BOB_DISTANCE := 0.05
 @export var FOV := 75.0
 @export var INTERACT_DISTANCE := 2.0
+@export_category("Camera")
+@export var SIDEWAYS_TILT := 1.5
+@export var FALL_TILT_TIME := 0.5
+@export var FALL_THRESHOLD := -5.0
 @export_category("Weapon")
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
 @export_category("Refrences")
-@export var step_handler: stair_handler
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Recoil/Camera
@@ -25,6 +28,10 @@ var speed := 0.0
 var time_bob := 0.0
 var is_crouching := false
 var interact_cast_result
+var fall_value := 0.0
+var FALL_TILT_TIMER := 0.0
+var forward_tilt_max := 1.25
+var current_fall_velocity: float 
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -81,22 +88,24 @@ func _physics_process(delta: float) -> void:
 	
 	add_gravity(delta)
 	
+	camera_tilt(delta)
+	
 	change_speed()
+	
+	air_procces(fall_strength)
 	
 	interact_cast()
 	
 	move_and_slide()
-	
-	step_handler.handle_step_climbing()
 
 func add_gravity(delta) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 func fov(delta) -> void:
-	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z).length()
+	var horizontal_velocity := Vector3(velocity.x, 0, velocity.z).length()
 	var velocity_clamped = clamp(horizontal_velocity, 0.5, RUN_SPEED * 2)
-	var target_fov = FOV + (speed / 2) * velocity_clamped
+	var target_fov: float = FOV + (speed / 2) * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	if is_crouching:
 		target_fov *= 0.7
@@ -120,9 +129,9 @@ func change_speed() -> void:
 
 func head_bob(delta) -> void:
 	time_bob += delta * velocity.length() * float(is_on_floor())
-	var pos = Vector3.ZERO
+	var pos := Vector3.ZERO
 	pos.y = sin(time_bob * BOB_FREQUENCY) * BOB_DISTANCE
-	pos.x = abs(sin(time_bob * BOB_FREQUENCY / 2) * BOB_DISTANCE)
+	#pos.x = abs(sin(time_bob * BOB_FREQUENCY / 2) * BOB_DISTANCE)
 	camera.transform.origin = pos
 
 func jump() -> void:
@@ -137,15 +146,15 @@ func interact():
 		interact_cast_result.emit_signal("interacting")
 
 func interact_cast():
-	var space_state = camera.get_world_3d().direct_space_state
-	var screen_center = get_viewport().size / 2
+	var space_state := camera.get_world_3d().direct_space_state
+	var screen_center: Vector2 = get_viewport().size / 2
 	screen_center.x += 1
 	screen_center.y += 1
-	var origin = camera.project_ray_origin(screen_center)
-	var end = origin + camera.project_ray_normal(screen_center) * INTERACT_DISTANCE
-	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	var origin := camera.project_ray_origin(screen_center)
+	var end := origin + camera.project_ray_normal(screen_center) * INTERACT_DISTANCE
+	var query := PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_bodies = true
-	var result = space_state.intersect_ray(query)
+	var result := space_state.intersect_ray(query)
 	var current_cast_result = result.get("collider")
 	if current_cast_result != interact_cast_result:
 		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
@@ -153,3 +162,39 @@ func interact_cast():
 		if current_cast_result and current_cast_result.has_user_signal("focused"):
 			current_cast_result.emit_signal("focused")
 	interact_cast_result = current_cast_result
+
+func camera_tilt(delta) -> void:
+	var angles := camera.rotation
+	var offset := Vector3.ZERO
+	var forward := global_transform.basis.z
+	var right := global_transform.basis.x
+	var right_dot := velocity.dot(right)
+	var right_tilt := clampf(right_dot * deg_to_rad(SIDEWAYS_TILT), deg_to_rad(-SIDEWAYS_TILT), deg_to_rad(SIDEWAYS_TILT))
+	angles.z = lerp(angles.z, -right_tilt, delta * 125)
+	FALL_TILT_TIMER -= delta
+	var fall_ratio = max(0.0, FALL_TILT_TIMER / FALL_TILT_TIME)
+	var fall_kick_amount = fall_ratio * fall_value
+	angles.x -= fall_kick_amount
+	offset.y -= fall_kick_amount
+	camera.position = offset
+	camera.rotation = lerp(camera.rotation, angles, delta * 8.0)
+	head.rotation.x = lerp(head.rotation.x, 0.0, delta * 8) - fall_kick_amount
+
+func add_fall_kick(fall_strentgh: float) -> void:
+	fall_value = deg_to_rad(fall_strentgh)
+	FALL_TILT_TIMER = FALL_TILT_TIME
+
+func check_fall_speed() -> bool:
+	if current_fall_velocity < FALL_THRESHOLD:
+		current_fall_velocity = 0.0
+		return true
+	else:
+		current_fall_velocity = 0.0
+		return false
+
+func air_procces(fall_strentgh) -> void:
+	if is_on_floor():
+		if check_fall_speed():
+			add_fall_kick(fall_strentgh)
+	current_fall_velocity = velocity.y
+	#error here
