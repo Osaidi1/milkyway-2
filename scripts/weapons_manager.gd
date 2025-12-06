@@ -24,6 +24,7 @@ var mouse_movement: Vector2
 var random_sway_x: float
 var random_sway_y: float
 var random_sway_amount: float
+var shoot_time_gone: float
 var time := 0.0
 var idle_sway_adjustment
 var idle_sway_rotation_strength
@@ -43,6 +44,10 @@ func _input(event: InputEvent) -> void:
 		load_weapon()
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
+
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("shoot"):
+		shoot()
 
 func load_weapon() -> void:
 	self.mesh = weapon.mesh_scene
@@ -93,22 +98,6 @@ func weapon_bob(delta, bob_speed: float, hbob_amount:float, vbob_amount:float) -
 	weapon_bob_amount.x = sin(time * bob_speed) * hbob_amount
 	weapon_bob_amount.y = abs(cos(time * bob_speed) * vbob_amount)
 
-func attack() -> void:
-	if !weapon.meele:
-		weapon_fired.emit()
-		var camera = $"../.."
-		var space_state = camera.get_world_3d().direct_space_state
-		var screen_center = get_viewport().size / 2
-		screen_center.x += 1
-		screen_center.y += 1
-		var origin = camera.project_ray_origin(screen_center)
-		var end = origin + camera.project_ray_normal(screen_center) * 1000
-		var query = PhysicsRayQueryParameters3D.create(origin, end)
-		query.collide_with_bodies = true
-		var result = space_state.intersect_ray(query)
-		if result:
-			bullet_damage(result.get("position"), result.get("normal"))
-
 func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	var instance = bullet.instantiate()
 	get_tree().root.add_child(instance)
@@ -120,3 +109,25 @@ func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	fade.tween_property(instance, "modulate:a", 0, 1)
 	await get_tree().create_timer(1.5).timeout
 	instance.queue_free()
+
+func shoot() -> void:
+	if !weapon.meele:
+		weapon_fired.emit()
+		var camera = $"../.."
+		var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
+		var origin: Vector3 = camera.global_position
+		var ray_direction: Vector3 = -camera.global_basis.z
+		var end = origin + ray_direction.normalized() * weapon.shoot_range
+		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		query.collide_with_bodies = true
+		var result: Dictionary = space_state.intersect_ray(query)
+		if result:
+			bullet_damage(result.get("position"), result.get("normal"))
+		if not result.is_empty():
+			damage_target(result)
+		shoot_time_gone = 0.0
+
+func damage_target(result: Dictionary) -> void:
+	var target = result["collider"]
+	if target is damageable:
+		target.take_damage(weapon.single_damage)

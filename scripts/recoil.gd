@@ -17,7 +17,8 @@ func _process(delta: float) -> void:
 	basis = Quaternion.from_euler(current_rotation)
 
 func add_recoil() -> void:
-	recoil_amount = weapon.weapon.rotate_recoil_amount
-	snap_amount = weapon.weapon.rotate_snap
-	speed = weapon.weapon.rotate_speed
-	target_rotation += Vector3(randf_range(-recoil_amount.x, recoil_amount.x), randf_range(-recoil_amount.y, recoil_amount.y), randf_range(-recoil_amount.z, recoil_amount.z))
+	if !weapon.weapon.meele:
+		recoil_amount = weapon.weapon.rotate_recoil_amount
+		snap_amount = weapon.weapon.rotate_snap
+		speed = weapon.weapon.rotate_speed
+		target_rotation += Vector3(randf_range(-recoil_amount.x, recoil_amount.x), randf_range(-recoil_amount.y, recoil_amount.y), randf_range(-recoil_amount.z, recoil_amount.z))

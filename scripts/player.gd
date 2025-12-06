@@ -11,8 +11,8 @@ extends CharacterBody3D
 @export var INTERACT_DISTANCE := 2.0
 @export_category("Camera")
 @export var SIDEWAYS_TILT := 1.5
-@export var FALL_TILT_TIME := 0.5
-@export var FALL_THRESHOLD := -5.0
+@export var FALL_TILT_TIME := 0.3
+@export var FALL_THRESHOLD := -5.5
 @export_category("Weapon")
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
@@ -49,10 +49,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Crouch
 	if event.is_action_pressed("crouch"):
 		crouch()
-	
-	# Shoot
-	if event.is_action_pressed("shoot"):
-		shoot()
 	
 	# Rotate Camera
 	if event is InputEventMouseMotion:
@@ -92,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	
 	change_speed()
 	
-	air_procces(fall_strength)
+	air_procces()
 	
 	interact_cast()
 	
@@ -138,9 +134,6 @@ func jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-func shoot() -> void:
-	weapons.attack()
-
 func interact():
 	if interact_cast_result and interact_cast_result.has_user_signal("interacting"):
 		interact_cast_result.emit_signal("interacting")
@@ -166,9 +159,7 @@ func interact_cast():
 func camera_tilt(delta) -> void:
 	var angles := camera.rotation
 	var offset := Vector3.ZERO
-	var forward := global_transform.basis.z
-	var right := global_transform.basis.x
-	var right_dot := velocity.dot(right)
+	var right_dot := velocity.dot(camera.global_transform.basis.x)
 	var right_tilt := clampf(right_dot * deg_to_rad(SIDEWAYS_TILT), deg_to_rad(-SIDEWAYS_TILT), deg_to_rad(SIDEWAYS_TILT))
 	angles.z = lerp(angles.z, -right_tilt, delta * 125)
 	FALL_TILT_TIMER -= delta
@@ -180,21 +171,16 @@ func camera_tilt(delta) -> void:
 	camera.rotation = lerp(camera.rotation, angles, delta * 8.0)
 	head.rotation.x = lerp(head.rotation.x, 0.0, delta * 8) - fall_kick_amount
 
-func add_fall_kick(fall_strentgh: float) -> void:
-	fall_value = deg_to_rad(fall_strentgh)
+func add_fall_kick(fall_strength: float) -> void:
+	fall_value = deg_to_rad(fall_strength)
 	FALL_TILT_TIMER = FALL_TILT_TIME
 
 func check_fall_speed() -> bool:
-	if current_fall_velocity < FALL_THRESHOLD:
-		current_fall_velocity = 0.0
-		return true
-	else:
-		current_fall_velocity = 0.0
-		return false
+	return current_fall_velocity < FALL_THRESHOLD
 
-func air_procces(fall_strentgh) -> void:
+func air_procces() -> void:
 	if is_on_floor():
 		if check_fall_speed():
-			add_fall_kick(fall_strentgh)
+			var fall_strength = abs(current_fall_velocity) * 0.35
+			add_fall_kick(fall_strength)
 	current_fall_velocity = velocity.y
-	#error here

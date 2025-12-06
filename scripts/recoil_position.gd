@@ -2,7 +2,7 @@ extends Node3D
 
 @export var weapon: MeshInstance3D
 
-var recoil_amount: Vector3
+var position_recoil_amount: Vector3
 var snap_amount: float
 var speed: float
 var target_position: Vector3
@@ -17,7 +17,8 @@ func _process(delta: float) -> void:
 	position = current_position
 
 func add_recoil() -> void:
-	recoil_amount = weapon.weapon.position_recoil_amount
-	snap_amount = weapon.weapon.position_snap
-	speed = weapon.weapon.position_speed
-	target_position += Vector3(randf_range(recoil_amount.x, recoil_amount.x * 2.0), randf_range(-recoil_amount.y, recoil_amount.y), randf_range(recoil_amount.z, recoil_amount.z * 2.0))
+	if !weapon.weapon.meele:
+		position_recoil_amount = weapon.weapon.position_recoil_amount
+		snap_amount = weapon.weapon.position_snap
+		speed = weapon.weapon.position_speed
+		target_position = Vector3(randf_range(position_recoil_amount.x, position_recoil_amount.x * 2), randf_range(position_recoil_amount.y, position_recoil_amount.y * 2), randf_range(-position_recoil_amount.z, position_recoil_amount.z))

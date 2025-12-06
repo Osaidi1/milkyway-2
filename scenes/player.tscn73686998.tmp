@@ -99,6 +99,19 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
+WALK_SPEED = null
+RUN_SPEED = null
+JUMP_VELOCITY = null
+SENSITIVITY = null
+BOB_FREQUENCY = null
+BOB_DISTANCE = null
+FOV = null
+INTERACT_DISTANCE = null
+SIDEWAYS_TILT = null
+FALL_TILT_TIME = null
+FALL_THRESHOLD = null
+WEAPON_BOB_H = null
+WEAPON_BOB_V = null
 
 [node name="Shape" type="MeshInstance3D" parent="."]
 visible = false

@@ -4,6 +4,10 @@ extends Resource
 @export var Name: StringName
 @export_category("Data")
 @export var meele := false
+@export var auto_shoot := false
+@export var auto_speed := 0.1
+@export var shoot_range := 200
+@export var single_damage := 10
 @export_category("Orientation")
 @export var position: Vector3
 @export var rotation: Vector3
@@ -27,6 +31,6 @@ extends Resource
 @export var position_speed: float
 @export_category("Muzzle Flash")
 @export var flash_time := 0.85
-@export var muzzle_position := Vector3(0,0,0) 
+@export var muzzle_position: Vector3
 @export_category("Visuals")
 @export var mesh_scene: Mesh
