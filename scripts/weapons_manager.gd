@@ -18,6 +18,7 @@ signal weapon_fired
 			load_weapon()
 
 @onready var player: CharacterBody3D = $"../../../../.."
+@onready var delay: Timer = $Delay
 
 var sway_noise: FastNoiseLite
 var mouse_movement: Vector2
@@ -26,6 +27,9 @@ var random_sway_y: float
 var random_sway_amount: float
 var shoot_time_gone: float
 var time := 0.0
+var magazine_count: int
+var total_ammo_count: int
+var is_reloading := false
 var idle_sway_adjustment
 var idle_sway_rotation_strength
 var weapon_bob_amount: Vector2 = Vector2.ZERO
@@ -34,6 +38,8 @@ var bullet = preload("res://small_but_mighty/bullet_decal.tscn")
 func _ready() -> void:
 	await owner.ready
 	load_weapon()
+	magazine_count = weapon.magazine_size
+	total_ammo_count = weapon.start_ammo - magazine_count
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("weapon_up"):
@@ -42,12 +48,16 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("weapon_down"):
 		weapon = load("res://weapon_resource/crowbar.tres")
 		load_weapon()
+	if event.is_action_pressed("reload"):
+		reload()
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("shoot"):
-		shoot()
+	delay.wait_time = weapon.bullet_delay
+	if delay.is_stopped():
+		if Input.is_action_pressed("shoot"):
+			shoot()
 
 func load_weapon() -> void:
 	self.mesh = weapon.mesh_scene
@@ -111,7 +121,7 @@ func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	instance.queue_free()
 
 func shoot() -> void:
-	if !weapon.meele:
+	if !weapon.meele and magazine_count > 0:
 		weapon_fired.emit()
 		var camera = $"../.."
 		var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
@@ -126,8 +136,43 @@ func shoot() -> void:
 		if not result.is_empty():
 			damage_target(result)
 		shoot_time_gone = 0.0
+		remove_bullets()
+		delay.start()
 
 func damage_target(result: Dictionary) -> void:
 	var target = result["collider"]
 	if target is damageable:
 		target.take_damage(weapon.single_damage)
+
+func remove_bullets() -> void:
+	magazine_count -= 1
+	if magazine_count < 1 and total_ammo_count > 0:
+		reload()
+
+func reload() -> void:
+	if magazine_count == weapon.magazine_size: return
+	is_reloading = true
+	
+	if magazine_count == 0:
+		if total_ammo_count >= weapon.magazine_size:
+			await get_tree().create_timer(weapon.reload_time).timeout
+			magazine_count += weapon.magazine_size
+			total_ammo_count -= weapon.magazine_size
+		elif total_ammo_count < weapon.magazine_size:
+			await get_tree().create_timer(weapon.reload_time).timeout
+			magazine_count += total_ammo_count
+			total_ammo_count = 0
+		elif total_ammo_count == 0:
+			pass
+	else:
+		var bullets_needed = weapon.magazine_size - magazine_count
+		if total_ammo_count >= bullets_needed:
+			await get_tree().create_timer(weapon.reload_time).timeout
+			magazine_count = weapon.magazine_size
+			total_ammo_count -= bullets_needed
+		elif total_ammo_count < bullets_needed:
+			await get_tree().create_timer(weapon.reload_time).timeout
+			magazine_count += total_ammo_count
+			total_ammo_count = 0
+		elif total_ammo_count == 0:
+			pass

@@ -184,3 +184,34 @@ width = 2.0
 [node name="StairUp" type="RayCast3D" parent="."]
 
 [node name="StairDown" type="RayCast3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 82.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 23
+text = "FPS: 100"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 1688.0
+offset_top = 813.0
+offset_right = 1757.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 60
+text = "30"
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -209.0
+offset_right = -162.0
+offset_bottom = -126.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "120"

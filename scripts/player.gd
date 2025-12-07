@@ -23,6 +23,9 @@ extends CharacterBody3D
 @onready var animations: AnimationPlayer = $Animations
 @onready var crouch_check: ShapeCast3D = $CrouchCheck
 @onready var weapons: MeshInstance3D = $Head/Recoil/Camera/RecoilPosition/Weapons
+@onready var fps: Label = $CanvasLayer/Label
+@onready var ammo: Label = $CanvasLayer/Label2
+@onready var total_ammo: Label = $CanvasLayer/Label3
 
 var speed := 0.0
 var time_bob := 0.0
@@ -76,6 +79,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 4.0)
 	if velocity != Vector3(0, 0, 0):
 		weapons.weapon_bob(delta, 2.0, 0.01, 0.025)
+	
+	fps.text = str(Engine.get_frames_per_second()) 
+	ammo.text = str(weapons.magazine_count)
+	total_ammo.text = str(weapons.total_ammo_count)
 	
 	# Funcs
 	head_bob(delta)

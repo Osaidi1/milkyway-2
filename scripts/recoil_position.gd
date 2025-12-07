@@ -21,4 +21,4 @@ func add_recoil() -> void:
 		position_recoil_amount = weapon.weapon.position_recoil_amount
 		snap_amount = weapon.weapon.position_snap
 		speed = weapon.weapon.position_speed
-		target_position = Vector3(randf_range(position_recoil_amount.x, position_recoil_amount.x * 2), randf_range(position_recoil_amount.y, position_recoil_amount.y * 2), randf_range(-position_recoil_amount.z, position_recoil_amount.z))
+		target_position = Vector3(randf_range(-position_recoil_amount.x, position_recoil_amount.x), randf_range(-position_recoil_amount.y, position_recoil_amount.y), randf_range(position_recoil_amount.z, position_recoil_amount.z * 2.0))

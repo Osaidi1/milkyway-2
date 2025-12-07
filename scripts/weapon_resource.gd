@@ -4,10 +4,14 @@ extends Resource
 @export var Name: StringName
 @export_category("Data")
 @export var meele := false
-@export var auto_shoot := false
-@export var auto_speed := 0.1
-@export var shoot_range := 200
+@export var bullet_delay := 0.1
+@export var shoot_range := 1000
 @export var single_damage := 10
+@export_category("Bullets")
+@export var magazine_size := 20
+@export var max_ammo := 350
+@export var start_ammo := 150
+@export var reload_time := 2
 @export_category("Orientation")
 @export var position: Vector3
 @export var rotation: Vector3

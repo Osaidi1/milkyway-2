@@ -12,7 +12,6 @@ func _ready() -> void:
 
 func add_muzzle_flash() -> void:
 	if !weapon.weapon.meele:
-		
 		flash_time = weapon.weapon.flash_time
 		muzzle_pos = weapon.weapon.muzzle_position
 		light.position = muzzle_pos
@@ -21,4 +20,3 @@ func add_muzzle_flash() -> void:
 		particles.emitting = true
 		await get_tree().create_timer(flash_time).timeout
 		light.visible = false
-		particles.emitting = false
