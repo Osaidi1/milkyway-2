@@ -50,7 +50,7 @@ particles = NodePath("Flame")
 light = NodePath("Flash")
 
 [node name="Flame" type="GPUParticles3D" parent="Muzzle Flash"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.494802, 0.0284727, -5.20113e-10)
+transform = Transform3D(1, 0, 3.20259e-10, 1.49012e-08, 1, -8.60067e-10, -1.63677e-09, -8.50146e-10, 1, 0.477073, 0.0275305, -0.00013157)
 emitting = false
 amount = 10
 lifetime = 0.04

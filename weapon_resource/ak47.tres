@@ -32,6 +32,6 @@ position_recoil_amount = Vector3(0.01, 0.01, 0.025)
 position_snap = 20.0
 position_speed = 10.0
 flash_time = 0.1
-muzzle_position = Vector3(0.494802, 0.0284727, -5.20113e-10)
+muzzle_position = Vector3(0.477073, 0.0275305, -0.00013157)
 mesh_scene = ExtResource("1_k2led")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"
