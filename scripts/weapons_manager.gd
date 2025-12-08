@@ -53,7 +53,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	delay.wait_time = weapon.bullet_delay
 	if delay.is_stopped():
 		if Input.is_action_pressed("shoot"):

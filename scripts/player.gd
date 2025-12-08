@@ -80,12 +80,10 @@ func _physics_process(delta: float) -> void:
 	if velocity != Vector3(0, 0, 0):
 		weapons.weapon_bob(delta, 2.0, 0.01, 0.025)
 	
-	fps.text = str(Engine.get_frames_per_second()) 
-	ammo.text = str(weapons.magazine_count)
-	total_ammo.text = str(weapons.total_ammo_count)
-	
 	# Funcs
 	head_bob(delta)
+	
+	show_bullet_count()
 	
 	fov(delta)
 	
@@ -191,3 +189,8 @@ func air_procces() -> void:
 			var fall_strength = abs(current_fall_velocity) * 0.35
 			add_fall_kick(fall_strength)
 	current_fall_velocity = velocity.y
+
+func show_bullet_count() -> void:
+	fps.text = str(Engine.get_frames_per_second()) 
+	ammo.text = str(weapons.magazine_count)
+	total_ammo.text = str(weapons.total_ammo_count)
