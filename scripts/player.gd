@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-@export_category("Player")
 @export var WALK_SPEED := 4.0
 @export var RUN_SPEED := 6.0
 @export var JUMP_VELOCITY := 5
@@ -10,7 +9,7 @@ extends CharacterBody3D
 @export var FOV := 75.0
 @export var INTERACT_DISTANCE := 2.0
 @export_category("Camera")
-@export var SIDEWAYS_TILT := 1.5
+@export var SIDEWAYS_TILT := 1
 @export var FALL_TILT_TIME := 0.3
 @export var FALL_THRESHOLD := -5.5
 @export_category("Weapon")

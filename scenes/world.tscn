@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4aremvvkmjl8"]
+[gd_scene load_steps=12 format=3 uid="uid://b4aremvvkmjl8"]
 
 [ext_resource type="PackedScene" uid="uid://dkrvx17yiafo1" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="PackedScene" uid="uid://dm4anfqnarbcd" path="res://scenes/zombie.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cmvxgkg80elj2" path="res://scenes/zombie.tscn" id="3_4wyf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5uuo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,8 +16,9 @@ sky = SubResource("Sky_nnsk1")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
-albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
+[sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
+vertices = PackedVector3Array(-11.4207, 0.44549, -11.3711, -11.4207, 0.44549, 11.3789, 11.3293, 0.44549, 11.3789, 11.3293, 0.44549, -11.3711)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
 albedo_color = Color(0.154041, 0.513893, 0.481125, 1)
@@ -31,6 +32,9 @@ albedo_color = Color(0.375628, 0.384039, 0.852708, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
 albedo_color = Color(0.628705, 0.202815, 0.35702, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
+albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
+
 [node name="World" type="Node3D"]
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
@@ -42,38 +46,42 @@ environment = SubResource("Environment_rwgxs")
 
 [node name="Playground" type="Node3D" parent="."]
 
-[node name="Floor" type="CSGBox3D" parent="Playground"]
-transform = Transform3D(24.2422, 0, 0, 0, 1, 0, 0, 0, 24.2422, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_e5uuo")
-use_collision = true
-size = Vector3(1, 0.0700684, 1)
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.90902, 0)
 
-[node name="Wall1" type="CSGBox3D" parent="Playground"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_rwgxs")
+
+[node name="Wall1" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(24.2422, 0, 0, 0, 2.67434, 0, 0, 0, 24.2422, -12.0649, 1.28266, 0)
 material_override = SubResource("StandardMaterial3D_nnsk1")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall2" type="CSGBox3D" parent="Playground"]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(24.2422, 0, 0, 0, 2.67434, 0, 0, 0, 24.2422, 12.0689, 1.28266, 0)
 material_override = SubResource("StandardMaterial3D_rwgxs")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall3" type="CSGBox3D" parent="Playground"]
+[node name="Wall3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1.05966e-06, 0, 24.2422, 0, 2.67434, 0, -24.2422, 0, -1.05966e-06, -0.0495863, 1.28266, 12.0724)
 material_override = SubResource("StandardMaterial3D_4wyf3")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall4" type="CSGBox3D" parent="Playground"]
+[node name="Wall4" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1.05966e-06, 0, 24.2422, 0, 2.67434, 0, -24.2422, 0, -1.05966e-06, -0.0495863, 1.28266, -11.9551)
 material_override = SubResource("StandardMaterial3D_k0juu")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.16533, 0)
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(24.2422, 0, 0, 0, 1, 0, 0, 0, 24.2422, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_e5uuo")
+use_collision = true
+size = Vector3(1, 0.0700684, 1)
 
-[node name="zombie" parent="." instance=ExtResource("2_rwgxs")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 6.6464, 0.0368342, 1.57337)
+[node name="Zombie" parent="." instance=ExtResource("3_4wyf3")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.77881, 1.31503, -7.11583)
