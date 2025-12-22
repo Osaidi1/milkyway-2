@@ -1,24 +1,62 @@
 class_name Zombie
-extends CharacterBody3D
+extends damageable
 
 @export var SPEED := 3.0
+@export var ATTACK_RANGE := 3.5
 
 @onready var player: CharacterBody3D = %Player
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var anim_flow: AnimationTree = $AnimFlow
+@onready var animations: AnimationPlayer = $Animations
+
+var state_machine
+var player_is_in_range: bool
+
+func _ready() -> void:
+	state_machine = anim_flow.get("parameters/playback")
 
 func _process(delta: float) -> void:
-	to_player()
+	animation()
 	
 	add_gravity(delta)
 	
 	move_and_slide()
 
-func to_player() -> void:
-	velocity = Vector3.ZERO
-	nav_agent.set_target_position(player.global_transform.origin)
-	var next_nav_point := nav_agent.get_next_path_position()
-	velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
-	look_at(Vector3(player.global_position.z, global_position.y, player.global_position.z), Vector3.UP)
-
 func add_gravity(delta) -> void:
-	velocity += get_gravity() * delta
+	velocity += (get_gravity() * 50) * delta
+
+func animation() -> void:
+	anim_flow.set("parameters/conditions/player nearby", player_is_in_range)
+	anim_flow.set("parameters/conditions/player not nearby", !player_is_in_range)
+	anim_flow.set("parameters/conditions/attack", player_in_attack_range())
+	match state_machine.get_current_node():
+		"run":
+			if player_is_in_range:
+				nav_agent.set_target_position(player.global_transform.origin)
+				var next_nav_point := nav_agent.get_next_path_position()
+				velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
+				rotate_toward_player(get_process_delta_time())
+		"attack":
+			rotate_toward_player(get_process_delta_time())
+			velocity = Vector3(0, 0, 0)
+		"idle":
+			velocity = Vector3(0, 0, 0)
+
+func player_in_attack_range() -> bool:
+	return global_position.distance_to(player.global_position) < ATTACK_RANGE
+
+func rotate_toward_player(delta):
+	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), 10 * delta)
+
+func hit_finished() -> void:
+	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
+		var dir = global_position.direction_to(player.global_position)
+		player.hit(dir)
+
+func _on_player_body_entered(body: Node3D) -> void:
+	if body is Player:
+		player_is_in_range = true
+
+func _on_player_body_exited(body: Node3D) -> void:
+	if body is Player:
+		player_is_in_range = false

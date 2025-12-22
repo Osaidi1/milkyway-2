@@ -1,15 +1,16 @@
 class_name damageable
-extends Node
+extends CharacterBody3D
 
-@export var health: float = 100.0
+@export var health: float = 100
 
-var current_health: float = 0.0
+var current_health: float = health
 
 func _ready() -> void:
 	current_health = health
 
 func take_damage(damage: float) -> void:
 	current_health -= damage
+	print(current_health)
 	if current_health <= 0:
 		die()
 

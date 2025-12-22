@@ -1,0 +1,219 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkrvx17yiafo1"]
+
+[ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://gtpwf5x6m0aj" path="res://scripts/recoil.gd" id="2_tuyoq"]
+[ext_resource type="Script" uid="uid://b8alqou5nifwa" path="res://scripts/recoil_position.gd" id="3_fjrip"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../Collision:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.610909, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../Collision:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_g2els"]
+resource_name = "crouch"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../Collision:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.6, 0), Vector3(0, -0.2, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../Collision:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
+_data = {
+&"RESET": SubResource("Animation_tuyoq"),
+&"crouch": SubResource("Animation_g2els")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_3vyb7")
+
+[node name="Shape" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_u8vuu")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3vyb7")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
+
+[node name="Recoil" type="Node3D" parent="Head" node_paths=PackedStringArray("weapon")]
+script = ExtResource("2_tuyoq")
+weapon = NodePath("Camera/RecoilPosition/Weapons")
+
+[node name="Camera" type="Camera3D" parent="Head/Recoil"]
+transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
+
+[node name="RecoilPosition" type="Node3D" parent="Head/Recoil/Camera" node_paths=PackedStringArray("weapon")]
+script = ExtResource("3_fjrip")
+weapon = NodePath("Weapons")
+
+[node name="Weapons" parent="Head/Recoil/Camera/RecoilPosition" instance=ExtResource("2_qhqgy")]
+transform = Transform3D(-0.004924, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994521, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
+skeleton = NodePath("../..")
+sway_speed = 1.0
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Head/Recoil/Camera")
+libraries = {
+&"": SubResource("AnimationLibrary_qhqgy")
+}
+
+[node name="CrouchCheck" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.570031, 0, 0, 0, 1, 0, 1.00831, 0)
+shape = SubResource("CapsuleShape3D_g2els")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CrosshairContainer" type="CenterContainer" parent="UI" node_paths=PackedStringArray("PLAYER", "LINES")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_g2els")
+PLAYER = NodePath("../..")
+LINES = [NodePath("Top"), NodePath("Bottom"), NodePath("Left"), NodePath("Right")]
+SPEED = 0.5
+DISTANCE = 5.0
+
+[node name="Crossahair" type="Line2D" parent="UI/CrosshairContainer"]
+position = Vector2(2, 1)
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+width = 2.0
+
+[node name="Top" type="Line2D" parent="UI/CrosshairContainer"]
+points = PackedVector2Array(0, -10, 0, -20)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="UI/CrosshairContainer"]
+points = PackedVector2Array(0, 10, 0, 20)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="UI/CrosshairContainer"]
+points = PackedVector2Array(-10, 0, -20, 0)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="UI/CrosshairContainer"]
+points = PackedVector2Array(10, 0, 20, 0)
+width = 2.0
+
+[node name="StairUp" type="RayCast3D" parent="."]
+
+[node name="StairDown" type="RayCast3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 82.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 23
+text = "FPS: 100"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 1645.0
+offset_top = 813.0
+offset_right = 1757.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 60
+text = "30"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -209.0
+offset_right = -162.0
+offset_bottom = -126.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "120"
+horizontal_alignment = 2

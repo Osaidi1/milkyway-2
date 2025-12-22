@@ -30,8 +30,8 @@ var time := 0.0
 var magazine_count: int
 var total_ammo_count: int
 var is_reloading := false
-var idle_sway_adjustment
-var idle_sway_rotation_strength
+var idle_sway_adjustment: float
+var idle_sway_rotation_strength: float
 var weapon_bob_amount: Vector2 = Vector2.ZERO
 var bullet = preload("res://small_but_mighty/bullet_decal.tscn")
 
@@ -129,7 +129,8 @@ func shoot() -> void:
 		var ray_direction: Vector3 = -camera.global_basis.z
 		var end = origin + ray_direction.normalized() * weapon.shoot_range
 		var query = PhysicsRayQueryParameters3D.create(origin, end)
-		query.collide_with_bodies = true
+		query.collide_with_areas = true
+		query.collision_mask = 2
 		var result: Dictionary = space_state.intersect_ray(query)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
@@ -142,7 +143,10 @@ func shoot() -> void:
 func damage_target(result: Dictionary) -> void:
 	var target = result["collider"]
 	if target is damageable:
-		target.take_damage(weapon.single_damage)
+		if target.is_in_group("head"):
+			target.take_damage(weapon.single_damage * 2)
+		else:
+			target.take_damage(weapon.single_damage)
 
 func remove_bullets() -> void:
 	magazine_count -= 1

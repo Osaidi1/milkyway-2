@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 @export var WALK_SPEED := 4.0
@@ -193,3 +194,7 @@ func show_bullet_count() -> void:
 	fps.text = str(Engine.get_frames_per_second()) 
 	ammo.text = str(weapons.magazine_count)
 	total_ammo.text = str(weapons.total_ammo_count)
+
+func hit(dir) -> void:
+	dir.y *= 0 
+	velocity += dir * 10
