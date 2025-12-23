@@ -18,6 +18,7 @@ signal weapon_fired
 			load_weapon()
 
 @onready var player: CharacterBody3D = $"../../../../.."
+
 @onready var delay: Timer = $Delay
 
 var sway_noise: FastNoiseLite
@@ -129,8 +130,10 @@ func shoot() -> void:
 		var ray_direction: Vector3 = -camera.global_basis.z
 		var end = origin + ray_direction.normalized() * weapon.shoot_range
 		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		query.collide_with_bodies = true
 		query.collide_with_areas = true
 		query.collision_mask = 2
+		query.exclude = [player]
 		var result: Dictionary = space_state.intersect_ray(query)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
@@ -142,8 +145,11 @@ func shoot() -> void:
 
 func damage_target(result: Dictionary) -> void:
 	var target = result["collider"]
+	var collider = target
+	while target and not (target is damageable):
+		target = target.get_parent()
 	if target is damageable:
-		if target.is_in_group("head"):
+		if collider.is_in_group("head"):
 			target.take_damage(weapon.single_damage * 2)
 		else:
 			target.take_damage(weapon.single_damage)

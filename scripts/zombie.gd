@@ -2,9 +2,9 @@ class_name Zombie
 extends damageable
 
 @export var SPEED := 3.0
-@export var ATTACK_RANGE := 3.5
+@export var ATTACK_RANGE := 2.5
 
-@onready var player: CharacterBody3D = %Player
+@onready var player: CharacterBody3D = $"../Player"
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_flow: AnimationTree = $AnimFlow
 @onready var animations: AnimationPlayer = $Animations
@@ -21,6 +21,8 @@ func _process(delta: float) -> void:
 	add_gravity(delta)
 	
 	move_and_slide()
+	
+	being_attacked()
 
 func add_gravity(delta) -> void:
 	velocity += (get_gravity() * 50) * delta
@@ -37,8 +39,11 @@ func animation() -> void:
 				velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
 				rotate_toward_player(get_process_delta_time())
 		"attack":
-			rotate_toward_player(get_process_delta_time())
-			velocity = Vector3(0, 0, 0)
+			var target_pos = player.global_position
+			target_pos.y = global_position.y
+			look_at(target_pos, Vector3.UP)
+			rotation.y += PI
+			velocity = Vector3.ZERO
 		"idle":
 			velocity = Vector3(0, 0, 0)
 
@@ -46,7 +51,7 @@ func player_in_attack_range() -> bool:
 	return global_position.distance_to(player.global_position) < ATTACK_RANGE
 
 func rotate_toward_player(delta):
-	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), 10 * delta)
+	rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), 10 * delta)
 
 func hit_finished() -> void:
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
@@ -60,3 +65,8 @@ func _on_player_body_entered(body: Node3D) -> void:
 func _on_player_body_exited(body: Node3D) -> void:
 	if body is Player:
 		player_is_in_range = false
+
+func being_attacked() -> void:
+	if !player_is_in_range and old_health > current_health:
+		player_is_in_range = true
+	old_health = current_health

@@ -26,6 +26,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[global_group]
+
+head=""
+
 [input]
 
 left={

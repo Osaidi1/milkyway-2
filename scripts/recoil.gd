@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var weapon: MeshInstance3D
+@onready var weapon: MeshInstance3D = %Weapons
 
 var current_rotation: Vector3
 var target_rotation: Vector3

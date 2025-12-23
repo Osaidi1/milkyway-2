@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var weapon: MeshInstance3D
+@onready var weapon: MeshInstance3D = %Weapons
 
 var position_recoil_amount: Vector3
 var snap_amount: float

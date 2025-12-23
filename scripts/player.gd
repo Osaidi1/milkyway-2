@@ -22,10 +22,10 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $Head/Recoil/Camera
 @onready var animations: AnimationPlayer = $Animations
 @onready var crouch_check: ShapeCast3D = $CrouchCheck
-@onready var weapons: MeshInstance3D = $Head/Recoil/Camera/RecoilPosition/Weapons
-@onready var fps: Label = $CanvasLayer/Label
-@onready var ammo: Label = $CanvasLayer/Label2
-@onready var total_ammo: Label = $CanvasLayer/Label3
+@onready var weapons: MeshInstance3D = %Weapons
+@onready var fps: Label = $Text/Label
+@onready var ammo: Label = $Text/Label2
+@onready var total_ammo: Label = $Text/Label3
 
 var speed := 0.0
 var time_bob := 0.0

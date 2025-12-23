@@ -110,18 +110,18 @@ shape = SubResource("CapsuleShape3D_3vyb7")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610909, 0)
 
-[node name="Recoil" type="Node3D" parent="Head" node_paths=PackedStringArray("weapon")]
+[node name="Recoil" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0721129, 0)
 script = ExtResource("2_tuyoq")
-weapon = NodePath("Camera/RecoilPosition/Weapons")
 
 [node name="Camera" type="Camera3D" parent="Head/Recoil"]
 transform = Transform3D(1, 0, 0, 0, 0.999431, -0.0337308, 0, 0.0337308, 0.999431, 0, 0, 0)
 
-[node name="RecoilPosition" type="Node3D" parent="Head/Recoil/Camera" node_paths=PackedStringArray("weapon")]
+[node name="RecoilPosition" type="Node3D" parent="Head/Recoil/Camera"]
 script = ExtResource("3_fjrip")
-weapon = NodePath("Weapons")
 
 [node name="Weapons" parent="Head/Recoil/Camera/RecoilPosition" instance=ExtResource("2_qhqgy")]
+unique_name_in_owner = true
 transform = Transform3D(-0.004924, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994521, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
 skeleton = NodePath("../..")
 sway_speed = 1.0
@@ -185,15 +185,15 @@ width = 2.0
 
 [node name="StairDown" type="RayCast3D" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Text" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="Text"]
 offset_right = 82.0
 offset_bottom = 24.0
 theme_override_font_sizes/font_size = 23
 text = "FPS: 100"
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
+[node name="Label2" type="Label" parent="Text"]
 offset_left = 1645.0
 offset_top = 813.0
 offset_right = 1757.0
@@ -202,7 +202,7 @@ theme_override_font_sizes/font_size = 60
 text = "30"
 horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="CanvasLayer"]
+[node name="Label3" type="Label" parent="Text"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
