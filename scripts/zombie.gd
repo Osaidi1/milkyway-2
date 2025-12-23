@@ -18,6 +18,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	animation()
 	
+	if current_health <= 0: return
+	
 	add_gravity(delta)
 	
 	move_and_slide()
@@ -31,6 +33,7 @@ func animation() -> void:
 	anim_flow.set("parameters/conditions/player nearby", player_is_in_range)
 	anim_flow.set("parameters/conditions/player not nearby", !player_is_in_range)
 	anim_flow.set("parameters/conditions/attack", player_in_attack_range())
+	anim_flow.set("parameters/conditions/dead", is_dead())
 	match state_machine.get_current_node():
 		"run":
 			if player_is_in_range:
@@ -46,6 +49,8 @@ func animation() -> void:
 			velocity = Vector3.ZERO
 		"idle":
 			velocity = Vector3(0, 0, 0)
+		"die":
+			velocity = Vector3.ZERO
 
 func player_in_attack_range() -> bool:
 	return global_position.distance_to(player.global_position) < ATTACK_RANGE
@@ -57,6 +62,9 @@ func hit_finished() -> void:
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
+
+func is_dead() -> bool:
+	return current_health <= 0
 
 func _on_player_body_entered(body: Node3D) -> void:
 	if body is Player:
