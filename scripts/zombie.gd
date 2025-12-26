@@ -9,10 +9,12 @@ extends damageable
 @onready var anim_flow: AnimationTree = $AnimFlow
 @onready var animations: AnimationPlayer = $Animations
 @onready var collision: CollisionShape3D = $Collision
-@onready var ragdoll: Node3D = $Ragdoll
 @onready var armature: Node3D = $Armature
-@onready var ragdoll_skeleton_simulator: PhysicalBoneSimulator3D = $Ragdoll/GeneralSkeleton/PhysicalBoneSimulator3D
+@onready var general_skeleton: Skeleton3D = $Armature/GeneralSkeleton
+@onready var general_skeleton_simulator: PhysicalBoneSimulator3D = $Armature/GeneralSkeleton/PhysicalBoneSimulator3D
+@onready var ragdoll: Node3D = $Ragdoll
 @onready var ragdoll_skeleton: Skeleton3D = $Ragdoll/GeneralSkeleton
+@onready var ragdoll_skeleton_simulator: PhysicalBoneSimulator3D = $Ragdoll/GeneralSkeleton/PhysicalBoneSimulator3D
 
 var state_machine
 var player_is_in_range: bool
@@ -20,8 +22,8 @@ var ragdoll_started := false
 var is_dead := false
 
 func _ready() -> void:
-	for collision in ragdoll_skeleton_simulator.get_children():
-		for shape in collision.get_children():
+	for collisions in ragdoll_skeleton_simulator.get_children():
+		for shape in collisions.get_children():
 			if shape is CollisionShape3D:
 				shape.disabled = true
 	state_machine = anim_flow.get("parameters/playback")
@@ -92,19 +94,32 @@ func die() -> void:
 	animations.stop()
 	velocity = Vector3.ZERO
 	collision.disabled = true
-	for collision in ragdoll_skeleton.get_children():
-		for shape in collision.get_children():
+	for collisions in ragdoll_skeleton.get_children():
+		for shape in collisions.get_children():
 			if shape is CollisionShape3D:
 				shape.disabled = false
+	ragdoll_pose_as_zombie()
 	armature.visible = false
 	ragdoll.visible = true
 	ragdoll_skeleton.physical_bones_start_simulation()
-	#currently working here
 
 func _on_player_body_entered(body: Node3D) -> void:
 	if is_dead: return
 	if body is Player:
 		player_is_in_range = true
+
+func ragdoll_pose_as_zombie() -> void:
+	for i in range(general_skeleton.get_child_count()):
+		var temp_position: Vector3
+		var temp_rotation: Vector3
+		var take_from = general_skeleton_simulator.get_child(i)
+		if take_from is PhysicalBone3D:
+			temp_position = take_from.global_position
+			temp_rotation = take_from.global_rotation
+		var give_to = ragdoll_skeleton_simulator.get_child(i)
+		if give_to is PhysicalBone3D:
+			give_to.global_position = temp_position
+			give_to.global_rotation = temp_rotation
 
 func _on_player_body_exited(body: Node3D) -> void:
 	if is_dead: return
