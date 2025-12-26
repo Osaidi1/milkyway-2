@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b4aremvvkmjl8"]
 
 [ext_resource type="PackedScene" uid="uid://dkrvx17yiafo1" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="PackedScene" uid="uid://cmvxgkg80elj2" path="res://scenes/zombie.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://ce36lr25kckwg" path="res://instantiable/zombie_ragdoll.tscn" id="3_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5uuo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -44,44 +44,41 @@ shadow_enabled = true
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rwgxs")
 
-[node name="Playground" type="Node3D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.09528, 0)
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="Navigation" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_rwgxs")
 
-[node name="Wall1" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall1" type="CSGBox3D" parent="Navigation"]
 transform = Transform3D(24.2422, 0, 0, 0, 2.67434, 0, 0, 0, 24.2422, -12.0649, 1.28266, 0)
 material_override = SubResource("StandardMaterial3D_nnsk1")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall2" type="CSGBox3D" parent="Navigation"]
 transform = Transform3D(24.2422, 0, 0, 0, 2.67434, 0, 0, 0, 24.2422, 12.0689, 1.28266, 0)
 material_override = SubResource("StandardMaterial3D_rwgxs")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall3" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall3" type="CSGBox3D" parent="Navigation"]
 transform = Transform3D(-1.05966e-06, 0, 24.2422, 0, 2.67434, 0, -24.2422, 0, -1.05966e-06, -0.0495863, 1.28266, 12.0724)
 material_override = SubResource("StandardMaterial3D_4wyf3")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Wall4" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall4" type="CSGBox3D" parent="Navigation"]
 transform = Transform3D(-1.05966e-06, 0, 24.2422, 0, 2.67434, 0, -24.2422, 0, -1.05966e-06, -0.0495863, 1.28266, -11.9551)
 material_override = SubResource("StandardMaterial3D_k0juu")
 use_collision = true
 size = Vector3(0.00463867, 1, 1)
 
-[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Floor" type="CSGBox3D" parent="Navigation"]
 transform = Transform3D(24.2422, 0, 0, 0, 1, 0, 0, 0, 24.2422, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_e5uuo")
 use_collision = true
 size = Vector3(1, 0.0700684, 1)
 
-[node name="Zombie" parent="." instance=ExtResource("3_4wyf3")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.77881, 9.51873, -7.11583)
-health = 100.0
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.09528, 0)
+
+[node name="Ragdoll" parent="." instance=ExtResource("3_k0juu")]
+transform = Transform3D(3.52867, -1.61729, 0.965844, 0.718247, 3.0511, 2.48494, -1.74144, -2.0187, 2.98198, -0.304503, 0.320707, -7.47151)

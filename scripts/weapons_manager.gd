@@ -34,7 +34,7 @@ var is_reloading := false
 var idle_sway_adjustment: float
 var idle_sway_rotation_strength: float
 var weapon_bob_amount: Vector2 = Vector2.ZERO
-var bullet = preload("res://small_but_mighty/bullet_decal.tscn")
+var bullet = preload("res://instantiable/bullet_decal.tscn")
 
 func _ready() -> void:
 	await owner.ready
