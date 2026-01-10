@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b4aremvvkmjl8"]
 
 [ext_resource type="PackedScene" uid="uid://dkrvx17yiafo1" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="PackedScene" uid="uid://ce36lr25kckwg" path="res://instantiable/zombie_ragdoll.tscn" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cmvxgkg80elj2" path="res://scenes/zombie.tscn" id="2_rwgxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5uuo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -80,5 +80,5 @@ size = Vector3(1, 0.0700684, 1)
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.09528, 0)
 
-[node name="Ragdoll" parent="." instance=ExtResource("3_k0juu")]
-transform = Transform3D(3.52867, -1.61729, 0.965844, 0.718247, 3.0511, 2.48494, -1.74144, -2.0187, 2.98198, -0.304503, 0.320707, -7.47151)
+[node name="Zombie" parent="." instance=ExtResource("2_rwgxs")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.60057, 1.31503, -6.41605)

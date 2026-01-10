@@ -7,6 +7,7 @@ extends Resource
 @export var bullet_delay := 0.1
 @export var shoot_range := 1000
 @export var single_damage := 10
+@export var gun_konckback := 100000
 @export_category("Bullets")
 @export var magazine_size := 20
 @export var max_ammo := 350

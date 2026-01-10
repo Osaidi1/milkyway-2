@@ -135,6 +135,7 @@ func shoot() -> void:
 		query.collision_mask = 2
 		query.exclude = [player]
 		var result: Dictionary = space_state.intersect_ray(query)
+		print(result)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
 		if not result.is_empty():
@@ -149,6 +150,11 @@ func damage_target(result: Dictionary) -> void:
 	while target and not (target is damageable):
 		target = target.get_parent()
 	if target is damageable:
+		print("here")
+		target.get_parent().get_parent().get_parent().get_parent().apply_gun_knockback()
+		
+		#Working here to get zombie not bone collider
+		
 		if collider.is_in_group("head"):
 			target.take_damage(weapon.single_damage * 2)
 		else:

@@ -12,11 +12,15 @@ extends damageable
 @onready var armature: Node3D = $Armature
 @onready var general_skeleton: Skeleton3D = $Armature/GeneralSkeleton
 @onready var general_skeleton_simulator: PhysicalBoneSimulator3D = $Armature/GeneralSkeleton/PhysicalBoneSimulator3D
+@onready var ragdoll_anims: AnimationPlayer
+
+const ZOMBIE_RAGDOLL = preload("res://instantiable/zombie_ragdoll.tscn")
 
 var state_machine
 var player_is_in_range: bool
 var ragdoll_started := false 
 var is_dead := false
+var knockback_velocity := Vector3.ZERO
 
 func _ready() -> void:
 	state_machine = anim_flow.get("parameters/playback")
@@ -87,6 +91,19 @@ func die() -> void:
 	velocity = Vector3.ZERO
 	collision.disabled = true
 	armature.visible = false
+	var ragdoll = ZOMBIE_RAGDOLL.instantiate()
+	ragdoll.global_transform = global_transform
+	ragdoll.rotation = global_rotation
+	var ragdoll_skeleton: Skeleton3D = ragdoll.get_child(0).get_child(0)
+	for i in general_skeleton.get_bone_count():
+		var pose := general_skeleton.get_bone_global_pose(i)
+		ragdoll_skeleton.set_bone_global_pose(i, pose)
+	get_parent().add_child(ragdoll)
+	var ragdoll_anims: AnimationPlayer = ragdoll.get_node("Animations")
+	await get_tree().create_timer(2.0).timeout
+	ragdoll_anims.play("dissolve")
+	await ragdoll_anims.animation_finished
+	ragdoll.queue_free()
 
 func _on_player_body_entered(body: Node3D) -> void:
 	if is_dead: return
@@ -103,3 +120,9 @@ func being_attacked() -> void:
 	if !player_is_in_range and old_health > current_health:
 		player_is_in_range = true
 	old_health = current_health
+
+func apply_gun_knockback() -> void:
+	var direction = (global_position - player.global_position).normalized()
+	knockback_velocity = direction * player.weapons.weapon.gun_konckback
+	knockback_velocity.y += 5
+	velocity = knockback_velocity
