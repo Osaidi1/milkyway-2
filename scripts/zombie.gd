@@ -2,7 +2,8 @@ class_name Zombie
 extends damageable
 
 @export var SPEED := 3.0
-@export var ATTACK_RANGE := 2.5
+@export var ATTACK_RANGE := 2
+@export var DAMAGE := 10
 
 @onready var player: CharacterBody3D = $"../Player"
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
@@ -81,6 +82,7 @@ func hit_finished() -> void:
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
+		player.take_damage(DAMAGE)
 
 func has_died() -> bool:
 	return current_health <= 0
@@ -100,7 +102,7 @@ func die() -> void:
 		ragdoll_skeleton.set_bone_global_pose(i, pose)
 	get_parent().add_child(ragdoll)
 	var ragdoll_anims: AnimationPlayer = ragdoll.get_node("Animations")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(3.5).timeout
 	ragdoll_anims.play("dissolve")
 	await ragdoll_anims.animation_finished
 	ragdoll.queue_free()
@@ -120,9 +122,3 @@ func being_attacked() -> void:
 	if !player_is_in_range and old_health > current_health:
 		player_is_in_range = true
 	old_health = current_health
-
-func apply_gun_knockback() -> void:
-	var direction = (global_position - player.global_position).normalized()
-	knockback_velocity = direction * player.weapons.weapon.gun_konckback
-	knockback_velocity.y += 5
-	velocity = knockback_velocity

@@ -18,8 +18,8 @@ signal weapon_fired
 			load_weapon()
 
 @onready var player: CharacterBody3D = $"../../../../.."
-
 @onready var delay: Timer = $Delay
+
 
 var sway_noise: FastNoiseLite
 var mouse_movement: Vector2
@@ -34,7 +34,8 @@ var is_reloading := false
 var idle_sway_adjustment: float
 var idle_sway_rotation_strength: float
 var weapon_bob_amount: Vector2 = Vector2.ZERO
-var bullet = preload("res://instantiable/bullet_decal.tscn")
+const BULLET_HOLE = preload("res://instantiable/bullet_decal.tscn")
+const BLOOD_SPLATER = preload("res://instantiable/blood_splater.tscn")
 
 func _ready() -> void:
 	await owner.ready
@@ -110,7 +111,7 @@ func weapon_bob(delta, bob_speed: float, hbob_amount:float, vbob_amount:float) -
 	weapon_bob_amount.y = abs(cos(time * bob_speed) * vbob_amount)
 
 func bullet_damage(pos: Vector3, normal: Vector3) -> void:
-	var instance = bullet.instantiate()
+	var instance = BULLET_HOLE.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = pos
 	instance.look_at(pos + normal, Vector3.UP)
@@ -150,15 +151,13 @@ func damage_target(result: Dictionary) -> void:
 	while target and not (target is damageable):
 		target = target.get_parent()
 	if target is damageable:
-		print("here")
-		target.get_parent().get_parent().get_parent().get_parent().apply_gun_knockback()
-		
-		#Working here to get zombie not bone collider
-		
 		if collider.is_in_group("head"):
 			target.take_damage(weapon.single_damage * 2)
 		else:
 			target.take_damage(weapon.single_damage)
+		var blood_effect := BLOOD_SPLATER.instantiate()
+		get_tree().root.add_child(blood_effect)
+		blood_effect.global_position = result.position
 
 func remove_bullets() -> void:
 	magazine_count -= 1

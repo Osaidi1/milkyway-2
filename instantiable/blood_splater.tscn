@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnqlki12whg8f"]
+
+[ext_resource type="Texture2D" uid="uid://b7ojq6s0fcc7w" path="res://assets/blood-decal.png" id="1_8m6b1"]
+[ext_resource type="Script" uid="uid://ctgi0oh7gvlw7" path="res://scripts/blood_splater.gd" id="2_fwoqi"]
+[ext_resource type="AudioStream" uid="uid://bhf6gykw4aqct" path="res://assets/blood-splatter-sound.mp3" id="3_2agmv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwoqi"]
+transparency = 1
+albedo_texture = ExtResource("1_8m6b1")
+billboard_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6nxce"]
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -25, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2agmv"]
+size = Vector2(0.2, 0.2)
+
+[node name="Blood Effect" type="GPUParticles3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_fwoqi")
+emitting = false
+amount = 32
+lifetime = 0.15
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_6nxce")
+draw_pass_1 = SubResource("QuadMesh_2agmv")
+script = ExtResource("2_fwoqi")
+
+[node name="Wound Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_2agmv")
+volume_db = -8.0
+pitch_scale = 1.6
+max_distance = 30.0
