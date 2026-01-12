@@ -82,7 +82,7 @@ func hit_finished() -> void:
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
-		player.take_damage(DAMAGE)
+		player.take_damage(-DAMAGE)
 
 func has_died() -> bool:
 	return current_health <= 0

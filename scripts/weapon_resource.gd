@@ -1,7 +1,7 @@
 class_name weapons_resource
 extends Resource
 
-@export var Name: StringName
+@export var weapon_name: String
 @export_category("Data")
 @export var meele := false
 @export var bullet_delay := 0.1

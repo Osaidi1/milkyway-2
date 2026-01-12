@@ -19,7 +19,7 @@ signal weapon_fired
 
 @onready var player: CharacterBody3D = $"../../../../.."
 @onready var delay: Timer = $Delay
-
+@onready var weapon_name: Label = $"../../../../../HUD/Weapon Name"
 
 var sway_noise: FastNoiseLite
 var mouse_movement: Vector2
@@ -58,7 +58,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	delay.wait_time = weapon.bullet_delay
 	if delay.is_stopped():
-		if Input.is_action_pressed("shoot"):
+		if Input.is_action_pressed("attack"):
 			shoot()
 
 func load_weapon() -> void:
@@ -67,7 +67,7 @@ func load_weapon() -> void:
 	rotation_degrees = weapon.rotation
 	idle_sway_adjustment = weapon.idle_amount
 	idle_sway_rotation_strength = weapon.idle_strength
-	random_sway_amount = weapon.idle_random_amount
+	random_sway_amount = weapon.idle_random_amount	
 
 func get_sway_noise() -> float:
 	var noise := sway_noise

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ngwdj")
-Name = &"ak47"
+weapon_name = "AK47"
 meele = false
 bullet_delay = 0.1
 shoot_range = 1000

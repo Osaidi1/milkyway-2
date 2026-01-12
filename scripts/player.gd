@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+@export var HEALTH := 50
 @export var WALK_SPEED := 4.0
 @export var RUN_SPEED := 6.0
 @export var JUMP_VELOCITY := 5
@@ -23,9 +24,9 @@ extends CharacterBody3D
 @onready var animations: AnimationPlayer = $Animations
 @onready var crouch_check: ShapeCast3D = $CrouchCheck
 @onready var weapons: MeshInstance3D = %Weapons
-@onready var fps: Label = $Text/Label
-@onready var ammo: Label = $Text/Label2
-@onready var total_ammo: Label = $Text/Label3
+@onready var ammo: Label = $HUD/Magazine
+@onready var total_ammo: Label = $HUD/Ammo
+@onready var weapon_name: Label = $"HUD/Weapon Name"
 
 var speed := 0.0
 var time_bob := 0.0
@@ -35,10 +36,13 @@ var fall_value := 0.0
 var FALL_TILT_TIMER := 0.0
 var forward_tilt_max := 1.25
 var current_fall_velocity: float 
+var current_health := 0
+var is_dead:= false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crouch_check.add_exception($".")
+	current_health = HEALTH
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
@@ -60,6 +64,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70), deg_to_rad(60))
 
 func _physics_process(delta: float) -> void:
+	if current_health <= 0:
+		is_dead = true
+		die()
+	
 	# Handle Movement
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -83,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	# Funcs
 	head_bob(delta)
 	
-	show_bullet_count()
+	show_gun_data()
 	
 	fov(delta)
 	
@@ -190,11 +198,17 @@ func air_procces() -> void:
 			add_fall_kick(fall_strength)
 	current_fall_velocity = velocity.y
 
-func show_bullet_count() -> void:
-	fps.text = str(Engine.get_frames_per_second()) 
+func show_gun_data() -> void:
+	weapon_name.text = str(weapons.weapon.weapon_name)
 	ammo.text = str(weapons.magazine_count)
 	total_ammo.text = str(weapons.total_ammo_count)
 
 func hit(dir) -> void:
 	dir.y *= 0 
 	velocity += dir * 10
+
+func die() -> void:
+	pass
+
+func take_damage(change) -> void:
+	current_health -= change
