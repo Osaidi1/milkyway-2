@@ -3,7 +3,7 @@ extends damageable
 
 @export var SPEED := 3.0
 @export var ATTACK_RANGE := 2
-@export var DAMAGE := 10
+@export var DAMAGE := 20
 
 @onready var player: CharacterBody3D = $"../Player"
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
@@ -82,7 +82,7 @@ func hit_finished() -> void:
 	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
-		player.take_damage(-DAMAGE)
+		player.take_damage(DAMAGE)
 
 func has_died() -> bool:
 	return current_health <= 0
@@ -101,10 +101,10 @@ func die() -> void:
 		var pose := general_skeleton.get_bone_global_pose(i)
 		ragdoll_skeleton.set_bone_global_pose(i, pose)
 	get_parent().add_child(ragdoll)
-	var ragdoll_anims: AnimationPlayer = ragdoll.get_node("Animations")
+	var ragdoll_anim: AnimationPlayer = ragdoll.get_node("Animations")
 	await get_tree().create_timer(3.5).timeout
-	ragdoll_anims.play("dissolve")
-	await ragdoll_anims.animation_finished
+	ragdoll_anim.play("dissolve")
+	await ragdoll_anim.animation_finished
 	ragdoll.queue_free()
 
 func _on_player_body_entered(body: Node3D) -> void:

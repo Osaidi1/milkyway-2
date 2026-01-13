@@ -57,9 +57,14 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(_delta: float) -> void:
 	delay.wait_time = weapon.bullet_delay
-	if delay.is_stopped():
-		if Input.is_action_pressed("attack"):
-			shoot()
+	if delay.is_stopped() :
+		if Engine.is_editor_hint():
+			if Input.has_signal("attack"):
+				if Input.is_action_pressed("attack"):
+					shoot()
+		else:
+			if Input.is_action_pressed("attack"):
+				shoot()
 
 func load_weapon() -> void:
 	self.mesh = weapon.mesh_scene
@@ -67,7 +72,7 @@ func load_weapon() -> void:
 	rotation_degrees = weapon.rotation
 	idle_sway_adjustment = weapon.idle_amount
 	idle_sway_rotation_strength = weapon.idle_strength
-	random_sway_amount = weapon.idle_random_amount	
+	random_sway_amount = weapon.idle_random_amount
 
 func get_sway_noise() -> float:
 	var noise := sway_noise
@@ -136,7 +141,6 @@ func shoot() -> void:
 		query.collision_mask = 2
 		query.exclude = [player]
 		var result: Dictionary = space_state.intersect_ray(query)
-		print(result)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
 		if not result.is_empty():

@@ -4,6 +4,6 @@ extends GPUParticles3D
 
 func _ready() -> void:
 	emitting = true
-	wound_sound.play
+	wound_sound.play()
 	await get_tree().create_timer(0.5, false).timeout
 	queue_free()

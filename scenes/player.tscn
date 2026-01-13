@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkrvx17yiafo1"]
+[gd_scene load_steps=20 format=3 uid="uid://dkrvx17yiafo1"]
 
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
@@ -103,25 +103,32 @@ tracks/2/keys = {
 "values": [2.0, 1.2]
 }
 
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "die"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
 _data = {
 &"RESET": SubResource("Animation_tuyoq"),
-&"crouch": SubResource("Animation_g2els")
+&"crouch": SubResource("Animation_g2els"),
+&"die": SubResource("Animation_fjrip")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur7pv"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wvv"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4r1p"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v2ag"]
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjrip"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smehm"]
-bg_color = Color(0, 0.568627, 1, 1)
+bg_color = Color(0, 0.772549, 1, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
@@ -262,49 +269,61 @@ horizontal_alignment = 2
 layout_mode = 3
 anchors_preset = 0
 offset_left = 229.0
-offset_top = 933.0
+offset_top = 968.0
 offset_right = 269.0
-offset_bottom = 973.0
+offset_bottom = 1008.0
 scale = Vector2(6.27999, 6.27999)
 
 [node name="BarOutline" type="Sprite2D" parent="HUD/Health"]
 texture = ExtResource("7_fjrip")
 
-[node name="Health" type="ProgressBar" parent="HUD/Health"]
-z_index = -1
-layout_mode = 0
-offset_left = -31.8
-offset_top = -3.8
-offset_right = -27.8
-offset_bottom = 23.2
-scale = Vector2(15.88, 0.276)
-theme_override_styles/background = SubResource("StyleBoxFlat_ur7pv")
+[node name="HealthUnderlay" type="ProgressBar" parent="HUD/Health"]
+z_index = -2
+offset_left = -32.0
+offset_top = -4.0
+offset_right = 32.0
+offset_bottom = 4.0
+theme_override_styles/background = SubResource("StyleBoxFlat_d2wvv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y4r1p")
 value = 100.0
+show_percentage = false
+
+[node name="Health" type="ProgressBar" parent="HUD/Health"]
+z_index = -1
+offset_left = -32.0
+offset_top = -4.0
+offset_right = 32.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_3v2ag")
+value = 99.88
 show_percentage = false
 
 [node name="Stamina" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 229.0
-offset_top = 994.0
+offset_top = 1027.0
 offset_right = 269.0
-offset_bottom = 1034.0
+offset_bottom = 1067.0
 scale = Vector2(1.256, 1.256)
 
 [node name="BarOutline" type="Sprite2D" parent="HUD/Stamina"]
 scale = Vector2(5, 5)
 texture = ExtResource("7_fjrip")
 
+[node name="Stamina Regen Wait" type="Timer" parent="HUD/Stamina"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Stamina" type="ProgressBar" parent="HUD/Stamina"]
 z_index = -1
-layout_mode = 0
-offset_left = -158.0
-offset_top = -18.0
-offset_right = -154.0
-offset_bottom = 9.0
-scale = Vector2(79.24, 1.35996)
+offset_left = -160.0
+offset_top = -20.0
+offset_right = 160.0
+offset_bottom = 19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fjrip")
 theme_override_styles/fill = SubResource("StyleBoxFlat_smehm")
-value = 100.0
+max_value = 1000.0
 show_percentage = false
+
+[connection signal="timeout" from="HUD/Stamina/Stamina Regen Wait" to="." method="_on_stamina_regen_wait_timeout"]
