@@ -128,7 +128,7 @@ func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 	instance.queue_free()
 
 func shoot() -> void:
-	if !weapon.meele and magazine_count > 0:
+	if magazine_count > 0:
 		weapon_fired.emit()
 		var camera = $"../.."
 		var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
@@ -141,6 +141,7 @@ func shoot() -> void:
 		query.collision_mask = 2
 		query.exclude = [player]
 		var result: Dictionary = space_state.intersect_ray(query)
+		print(result)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
 		if not result.is_empty():

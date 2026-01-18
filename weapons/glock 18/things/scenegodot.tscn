@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bugmdtwvbu8yk"]
+
+[ext_resource type="ArrayMesh" uid="uid://bo64yio3vun3c" path="res://weapons/glock 18/glock18.tres" id="1_puqxv"]
+
+[node name="scene" type="Node3D"]
+
+[node name="pew" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = ExtResource("1_puqxv")
+skeleton = NodePath("")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv2d75gy0w517"]
+
+[ext_resource type="ArrayMesh" uid="uid://cyefpe0ccfqqr" path="res://weapons/tec 9/tec 9.tres" id="1_ty7ky"]
+
+[node name="Sketchfab_Scene" type="Node3D"]
+
+[node name="body_low005__0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 4.44089e-19, 0.001, 0, -0.001, 4.44089e-19, 7.62939e-09, -3.8147e-09, 9.53674e-09)
+mesh = ExtResource("1_ty7ky")
+skeleton = NodePath("")

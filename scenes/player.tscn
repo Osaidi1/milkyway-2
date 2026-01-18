@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkrvx17yiafo1"]
+[gd_scene load_steps=22 format=3 uid="uid://dkrvx17yiafo1"]
 
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://gtpwf5x6m0aj" path="res://scripts/recoil.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://b8alqou5nifwa" path="res://scripts/recoil_position.gd" id="3_fjrip"]
+[ext_resource type="ArrayMesh" uid="uid://cl6plt4esyowt" path="res://weapons/m4a1/m4a1.tres" id="5_ur7pv"]
 [ext_resource type="FontFile" uid="uid://dkke0ijdtyul1" path="res://assets/Font.ttf" id="6_tuyoq"]
+[ext_resource type="Resource" uid="uid://bq62dxt2qkpgc" path="res://weapon_resource/m4a1.tres" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cl505e4bbokab" path="res://assets/bars_outline.png" id="7_fjrip"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
@@ -155,8 +157,10 @@ script = ExtResource("3_fjrip")
 
 [node name="Weapons" parent="Head/Recoil/Camera/RecoilPosition" instance=ExtResource("2_qhqgy")]
 unique_name_in_owner = true
-transform = Transform3D(-0.004924, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994521, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
+transform = Transform3D(-0.0151345, 0.996195, 0.0858316, -0.984808, -4.30473e-08, -0.173648, -0.172987, -0.0871557, 0.98106, 0.2, -0.14, -0.45)
+mesh = ExtResource("5_ur7pv")
 skeleton = NodePath("../..")
+weapon = ExtResource("6_y4r1p")
 sway_speed = 1.0
 
 [node name="Animations" type="AnimationPlayer" parent="."]
@@ -256,14 +260,15 @@ theme_override_font_sizes/font_size = 62
 text = "|"
 
 [node name="Weapon Name" type="Label" parent="HUD"]
-offset_left = 1738.0
-offset_top = 917.0
-offset_right = 1894.0
-offset_bottom = 1018.0
+offset_left = 1479.0
+offset_top = 941.0
+offset_right = 1895.0
+offset_bottom = 1007.0
 theme_override_fonts/font = ExtResource("6_tuyoq")
-theme_override_font_sizes/font_size = 75
+theme_override_font_sizes/font_size = 47
 text = "AK47"
 horizontal_alignment = 2
+uppercase = true
 
 [node name="Health" type="Control" parent="HUD"]
 layout_mode = 3
@@ -279,6 +284,7 @@ texture = ExtResource("7_fjrip")
 
 [node name="HealthUnderlay" type="ProgressBar" parent="HUD/Health"]
 z_index = -2
+layout_mode = 0
 offset_left = -32.0
 offset_top = -4.0
 offset_right = 32.0
@@ -290,6 +296,7 @@ show_percentage = false
 
 [node name="Health" type="ProgressBar" parent="HUD/Health"]
 z_index = -1
+layout_mode = 0
 offset_left = -32.0
 offset_top = -4.0
 offset_right = 32.0
@@ -317,6 +324,7 @@ one_shot = true
 
 [node name="Stamina" type="ProgressBar" parent="HUD/Stamina"]
 z_index = -1
+layout_mode = 0
 offset_left = -160.0
 offset_top = -20.0
 offset_right = 160.0

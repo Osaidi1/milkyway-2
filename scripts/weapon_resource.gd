@@ -3,7 +3,6 @@ extends Resource
 
 @export var weapon_name: String
 @export_category("Data")
-@export var meele := false
 @export var bullet_delay := 0.1
 @export var shoot_range := 1000
 @export var single_damage := 10
@@ -27,12 +26,12 @@ extends Resource
 @export var idle_strength := 300.0
 @export_range(0.1, 10.0, 0.1) var idle_random_amount := 5.0
 @export_category("Recoil")
-@export var rotate_recoil_amount: Vector3
-@export var rotate_snap: float
-@export var rotate_speed: float
+@export var rotate_recoil_amount: Vector3 = Vector3(0.05, 0.01, 0.01)
+@export var rotate_snap: float = 15
+@export var rotate_speed: float = 10
 @export var position_recoil_amount: Vector3
-@export var position_snap: float
-@export var position_speed: float
+@export var position_snap: float = 20
+@export var position_speed: float = 10
 @export_category("Muzzle Flash")
 @export var flash_time := 0.85
 @export var muzzle_position: Vector3

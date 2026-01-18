@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://blfs3ke2xb0a7"
+path.s3tc="res://.godot/imported/untitled_Image_0.png-3dbbe6c393e510cf701b923546459442.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "aa4fd8fed82b102ef6c8cbc23a3e7d9b"
+}
+
+[deps]
+
+source_file="res://weapons/remmington 870/things/untitled_Image_0.png"
+dest_files=["res://.godot/imported/untitled_Image_0.png-3dbbe6c393e510cf701b923546459442.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

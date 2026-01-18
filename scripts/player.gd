@@ -146,17 +146,15 @@ func change_speed(delta) -> void:
 	if Input.is_action_pressed("run") and current_stamina > 0:
 		is_regening = false
 		speed = RUN_SPEED
-		current_stamina -= stamina_drain * delta
-		current_stamina = clamp(current_stamina, 0, STAMINA)
+		if velocity.x > 0.01 or velocity.z > 0.01:
+			current_stamina -= stamina_drain * delta
+			current_stamina = clamp(current_stamina, 0, STAMINA)
 	else:
 		speed = WALK_SPEED
 		if current_stamina < STAMINA and stamina_regen_wait.is_stopped():
 			stamina_regen_wait.start()
 		if is_regening and current_stamina < STAMINA:
-			print("1")
 			current_stamina += stamina_regen * delta
-			print(current_stamina)
-			print("2")
 			current_stamina = clamp(current_stamina, 0, STAMINA)
 	stamina.value = current_stamina
 	if is_crouching:

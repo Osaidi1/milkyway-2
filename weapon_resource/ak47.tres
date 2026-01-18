@@ -6,9 +6,8 @@
 [resource]
 script = ExtResource("1_ngwdj")
 weapon_name = "AK47"
-meele = false
-bullet_delay = 0.1
-shoot_range = 1000
+bullet_delay = 0.2
+shoot_range = 150
 single_damage = 10
 magazine_size = 20
 max_ammo = 350
@@ -28,7 +27,7 @@ idle_random_amount = 2.5
 rotate_recoil_amount = Vector3(0.05, 0.01, 0.01)
 rotate_snap = 15.0
 rotate_speed = 10.0
-position_recoil_amount = Vector3(0.01, 0.01, 0.025)
+position_recoil_amount = Vector3(0.01, 0.01, 0.04)
 position_snap = 20.0
 position_speed = 10.0
 flash_time = 0.1

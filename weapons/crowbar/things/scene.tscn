@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://fyplmeaajhkw"]
-
-[ext_resource type="PackedScene" uid="uid://bjwi15i6a4huo" path="res://weapons/ak47/things/ak47.glb" id="1_mxdl6"]
-
-[node name="ak472" instance=ExtResource("1_mxdl6")]

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://dovd1ytg1cd4l"]
+
+[ext_resource type="ArrayMesh" uid="uid://bo64yio3vun3c" path="res://weapons/glock 18/glock18.tres" id="1_iuseo"]
+[ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_s5wxl"]
+
+[resource]
+script = ExtResource("1_s5wxl")
+weapon_name = "Glock 18"
+bullet_delay = 0.4
+shoot_range = 75
+single_damage = 5
+magazine_size = 8
+max_ammo = 250
+start_ammo = 125
+reload_time = 2
+position = Vector3(0.085, -0.09, -0.175)
+rotation = Vector3(-4.5, 95, 9)
+camera_min = Vector2(-20, -30)
+camera_max = Vector2(20, 30)
+camera_speed_position = 0.1
+camera_speed_rotation = 0.13
+camera_amount_position = 0.1
+camera_amount_rotation = 35.0
+idle_amount = 60.0
+idle_strength = 500.0
+idle_random_amount = 9.0
+rotate_recoil_amount = Vector3(0.07, 0.02, 0.02)
+rotate_snap = 10.0
+rotate_speed = 9.0
+position_recoil_amount = Vector3(0.02, 0.02, 0.035)
+position_snap = 20.0
+position_speed = 10.0
+flash_time = 0.1
+muzzle_position = Vector3(0.06, 0.035, 0)
+mesh_scene = ExtResource("1_iuseo")
+metadata/_custom_type_script = "uid://d23t6hf6wbf62"

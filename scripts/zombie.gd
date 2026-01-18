@@ -79,7 +79,7 @@ func rotate_toward_player(delta) -> void:
 
 func hit_finished() -> void:
 	if is_dead: return
-	if global_position.distance_to(player.global_position) < ATTACK_RANGE:
+	if global_position.distance_to(player.global_position) < ATTACK_RANGE + 1:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
 		player.take_damage(DAMAGE)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg1ju0560gxrt"]
+
+[ext_resource type="ArrayMesh" uid="uid://lrn1rrjnk4tc" path="res://weapons/m134/m134.tres" id="1_brwfd"]
+
+[node name="untitled" type="Node3D"]
+
+[node name="Cylinder_002_low_001_Base_body_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -3.89414e-07, 0, 3.89414e-07, -1, -2.22045e-14, 8.64674e-21, -2.22045e-14, 1, 0, -0.0478029, -1.06144e-15)
+mesh = ExtResource("1_brwfd")
+skeleton = NodePath("")

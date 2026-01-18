@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://tt78irjkvq5v"]
+
+[ext_resource type="ArrayMesh" uid="uid://ck3hlfs7e4tl1" path="res://weapons/scar-h/scar-h.tres" id="1_byngq"]
+
+[node name="untitled" type="Node3D"]
+
+[node name="Object_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -3.57628e-07, 1, 0, -1, -3.57628e-07, 0, 0, 0)
+mesh = ExtResource("1_byngq")
+skeleton = NodePath("")
