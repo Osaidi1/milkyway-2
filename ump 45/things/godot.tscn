@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brrgh6pb1ma8b"]
 
-[ext_resource type="ArrayMesh" uid="uid://crapyeilwb4ra" path="res://weapons/ump 45/ump 45.tres" id="1_iwayq"]
+[ext_resource type="ArrayMesh" uid="uid://crapyeilwb4ra" path="res://ump 45/ump 45.tres" id="1_iwayq"]
 
 [node name="untitled" type="Node3D"]
 

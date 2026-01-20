@@ -1,11 +1,11 @@
 [gd_resource type="ArrayMesh" load_steps=10 format=4 uid="uid://crapyeilwb4ra"]
 
-[ext_resource type="Texture2D" uid="uid://dq6feky7kqjdw" path="res://weapons/ump 45/things/untitled_material_baseColor.png" id="1_r46xp"]
-[ext_resource type="Texture2D" uid="uid://qqkt55vv2x4" path="res://weapons/ump 45/things/untitled_material_metallicRoughness.png" id="2_slnia"]
-[ext_resource type="Texture2D" uid="uid://dm6ah3jtvpcnk" path="res://weapons/ump 45/things/untitled_material_normal.png" id="3_4at3y"]
-[ext_resource type="Texture2D" uid="uid://cvxs4v6g0fkiy" path="res://weapons/ump 45/things/untitled_material_1_baseColor.png" id="4_ux1rn"]
-[ext_resource type="Texture2D" uid="uid://ccohhymqfknh4" path="res://weapons/ump 45/things/untitled_material_1_metallicRoughness.png" id="5_64u0b"]
-[ext_resource type="Texture2D" uid="uid://c16q8e3kmboki" path="res://weapons/ump 45/things/untitled_material_1_normal.png" id="6_3yqr2"]
+[ext_resource type="Texture2D" uid="uid://dq6feky7kqjdw" path="res://ump 45/things/untitled_material_baseColor.png" id="1_r46xp"]
+[ext_resource type="Texture2D" uid="uid://qqkt55vv2x4" path="res://ump 45/things/untitled_material_metallicRoughness.png" id="2_slnia"]
+[ext_resource type="Texture2D" uid="uid://dm6ah3jtvpcnk" path="res://ump 45/things/untitled_material_normal.png" id="3_4at3y"]
+[ext_resource type="Texture2D" uid="uid://cvxs4v6g0fkiy" path="res://ump 45/things/untitled_material_1_baseColor.png" id="4_ux1rn"]
+[ext_resource type="Texture2D" uid="uid://ccohhymqfknh4" path="res://ump 45/things/untitled_material_1_metallicRoughness.png" id="5_64u0b"]
+[ext_resource type="Texture2D" uid="uid://c16q8e3kmboki" path="res://ump 45/things/untitled_material_1_normal.png" id="6_3yqr2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkoic"]
 resource_name = "material.002"

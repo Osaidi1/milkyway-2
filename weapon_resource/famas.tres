@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://b6yawkl835c53"]
 
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_3w02q"]
-[ext_resource type="ArrayMesh" uid="uid://dridqj11dyt75" path="res://weapons/famas/famas.tres" id="1_t5tb1"]
+[ext_resource type="ArrayMesh" uid="uid://crqgv5widtbxr" path="res://weapons/famas/famas.tres" id="1_t5tb1"]
 
 [resource]
 script = ExtResource("1_3w02q")
 weapon_name = "FAMAS"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -14,8 +13,8 @@ magazine_size = 18
 max_ammo = 350
 start_ammo = 210
 reload_time = 2
-position = Vector3(0.095, -0.08, -0.09)
-rotation = Vector3(-5, 187.5, -10)
+position = Vector3(0.165, -0.165, 0.015)
+rotation = Vector3(-2, 181, -8)
 camera_min = Vector2(-10, -10)
 camera_max = Vector2(15, 15)
 camera_speed_position = 0.07
@@ -32,6 +31,6 @@ position_recoil_amount = Vector3(0.01, 0.01, 0.05)
 position_snap = 20.0
 position_speed = 10.0
 flash_time = 0.1
-muzzle_position = Vector3(0.000244915, 0.00434172, 0.30811)
+muzzle_position = Vector3(-0.00164591, 0.00904251, 0.772863)
 mesh_scene = ExtResource("1_t5tb1")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

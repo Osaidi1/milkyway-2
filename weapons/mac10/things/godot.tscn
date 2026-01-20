@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvmlkf7s0rnwk"]
+
+[ext_resource type="ArrayMesh" uid="uid://l7j0udjqccvy" path="res://weapons/mac10/mac10.tres" id="1_5bpne"]
+
+[node name="untitled" type="Node3D"]
+
+[node name="mac10" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_5bpne")
+skeleton = NodePath("")

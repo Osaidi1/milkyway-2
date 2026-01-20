@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvxs4v6g0fkiy"
-path.s3tc="res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.s3tc.ctex"
+uid="uid://dq6feky7kqjdw"
+path.s3tc="res://.godot/imported/untitled_material_baseColor.png-3a91add108ecceb0189622539cbb6dbd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b2334c15eef9d2a52b6c80feb8d01dc2"
+"md5": "59f4a2aacb12f9c0951783915a839d89"
 }
 
 [deps]
 
-source_file="res://weapons/ump 45/things/untitled_material_1_baseColor.png"
-dest_files=["res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.s3tc.ctex"]
+source_file="res://ump 45/things/untitled_material_baseColor.png"
+dest_files=["res://.godot/imported/untitled_material_baseColor.png-3a91add108ecceb0189622539cbb6dbd.s3tc.ctex"]
 
 [params]
 
