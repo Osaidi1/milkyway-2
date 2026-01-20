@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://gtpwf5x6m0aj" path="res://scripts/recoil.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://b8alqou5nifwa" path="res://scripts/recoil_position.gd" id="3_fjrip"]
-[ext_resource type="ArrayMesh" uid="uid://c0as60ws30b4r" path="res://weapons/p90/p90.tres" id="5_ur7pv"]
+[ext_resource type="ArrayMesh" uid="uid://cyefpe0ccfqqr" path="res://weapons/tec 9/tec 9.tres" id="5_ur7pv"]
 [ext_resource type="FontFile" uid="uid://dkke0ijdtyul1" path="res://assets/Font.ttf" id="6_tuyoq"]
-[ext_resource type="Resource" uid="uid://qyr3ak3l7gp8" path="res://weapon_resource/p90.tres" id="6_y4r1p"]
+[ext_resource type="Resource" uid="uid://c1vapv57lpph3" path="res://weapon_resource/tec 9.tres" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cl505e4bbokab" path="res://assets/bars_outline.png" id="7_fjrip"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]

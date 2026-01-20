@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://qyr3ak3l7gp8"]
 
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_d3o6h"]
-[ext_resource type="ArrayMesh" uid="uid://c0as60ws30b4r" path="res://weapons/p90/p90.tres" id="1_idn1v"]
+[ext_resource type="ArrayMesh" uid="uid://cv5t7e63m10kc" path="res://weapons/p90/p90.tres" id="1_idn1v"]
 
 [resource]
 script = ExtResource("1_d3o6h")
 weapon_name = "P90"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -14,8 +13,8 @@ magazine_size = 20
 max_ammo = 350
 start_ammo = 150
 reload_time = 2
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
+position = Vector3(0.145, -0.11, -0.275)
+rotation = Vector3(-4, 95, 10)
 camera_min = Vector2(-20, -20)
 camera_max = Vector2(20, 20)
 camera_speed_position = 0.07
@@ -32,6 +31,6 @@ position_recoil_amount = Vector3(0, 0, 0)
 position_snap = 0.0
 position_speed = 0.0
 flash_time = 0.85
-muzzle_position = Vector3(0, 0, 0)
+muzzle_position = Vector3(0.309491, 0.0105678, 0)
 mesh_scene = ExtResource("1_idn1v")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

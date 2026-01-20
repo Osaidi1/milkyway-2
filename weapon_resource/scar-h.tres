@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="weapons_resource" load_steps=2 format=3 uid="uid://kcsd7pj5ggbk"]
+[gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://kcsd7pj5ggbk"]
 
+[ext_resource type="ArrayMesh" uid="uid://ck3hlfs7e4tl1" path="res://weapons/scar-h/scar-h.tres" id="1_nvxv0"]
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_tv0y6"]
 
 [resource]
 script = ExtResource("1_tv0y6")
 weapon_name = "Scar-H"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -13,8 +13,8 @@ magazine_size = 20
 max_ammo = 350
 start_ammo = 150
 reload_time = 2
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
+position = Vector3(0.13, -0.19, -0.241)
+rotation = Vector3(-90, 187, -5)
 camera_min = Vector2(-20, -20)
 camera_max = Vector2(20, 20)
 camera_speed_position = 0.07
@@ -31,5 +31,6 @@ position_recoil_amount = Vector3(0, 0, 0)
 position_snap = 0.0
 position_speed = 0.0
 flash_time = 0.85
-muzzle_position = Vector3(0, 0, 0)
+muzzle_position = Vector3(0, -0.697661, 0.102124)
+mesh_scene = ExtResource("1_nvxv0")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

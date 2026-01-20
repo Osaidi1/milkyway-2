@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bimlapf1nuuax"
-path="res://.godot/imported/untitled.glb-6265e5be1ddf3ba587b3c858a651a807.scn"
+path="res://.godot/imported/untitled.glb-b16316c801e1985707dbd70e3ecb17c6.scn"
 
 [deps]
 
-source_file="res://ump 45/things/untitled.glb"
-dest_files=["res://.godot/imported/untitled.glb-6265e5be1ddf3ba587b3c858a651a807.scn"]
+source_file="res://weapons/ump 45/things/untitled.glb"
+dest_files=["res://.godot/imported/untitled.glb-b16316c801e1985707dbd70e3ecb17c6.scn"]
 
 [params]
 

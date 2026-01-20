@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="weapons_resource" load_steps=2 format=3 uid="uid://c1vapv57lpph3"]
+[gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://c1vapv57lpph3"]
 
+[ext_resource type="ArrayMesh" uid="uid://cyefpe0ccfqqr" path="res://weapons/tec 9/tec 9.tres" id="1_f3pll"]
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_pfuok"]
 
 [resource]
 script = ExtResource("1_pfuok")
 weapon_name = "Tec-9"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -32,4 +32,5 @@ position_snap = 0.0
 position_speed = 0.0
 flash_time = 0.85
 muzzle_position = Vector3(0, 0, 0)
+mesh_scene = ExtResource("1_f3pll")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"

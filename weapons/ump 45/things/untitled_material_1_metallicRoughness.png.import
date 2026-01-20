@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qqkt55vv2x4"
-path.s3tc="res://.godot/imported/untitled_material_metallicRoughness.png-8acbc554374b63b3695df201b977b8e1.s3tc.ctex"
+uid="uid://ccohhymqfknh4"
+path.s3tc="res://.godot/imported/untitled_material_1_metallicRoughness.png-7d83a51e2f69d958829aedf9e337f6ce.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "f839104a8ca9f04c733df7aed69c73e5"
+"md5": "7d26f879cde41f87bdce6cd7671c35d9"
 }
 
 [deps]
 
-source_file="res://ump 45/things/untitled_material_metallicRoughness.png"
-dest_files=["res://.godot/imported/untitled_material_metallicRoughness.png-8acbc554374b63b3695df201b977b8e1.s3tc.ctex"]
+source_file="res://weapons/ump 45/things/untitled_material_1_metallicRoughness.png"
+dest_files=["res://.godot/imported/untitled_material_1_metallicRoughness.png-7d83a51e2f69d958829aedf9e337f6ce.s3tc.ctex"]
 
 [params]
 

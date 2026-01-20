@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm6ah3jtvpcnk"
-path.s3tc="res://.godot/imported/untitled_material_normal.png-03d22cdbfb1a5bf0024800dbf9bdf873.s3tc.ctex"
+uid="uid://c16q8e3kmboki"
+path.s3tc="res://.godot/imported/untitled_material_1_normal.png-e7f86713e02fd8b38a7b28fc037b6393.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d4c190103a42c5ba0d6ca3185003f13e"
+"md5": "2205779b7541afbf962314b560b657c5"
 }
 
 [deps]
 
-source_file="res://ump 45/things/untitled_material_normal.png"
-dest_files=["res://.godot/imported/untitled_material_normal.png-03d22cdbfb1a5bf0024800dbf9bdf873.s3tc.ctex"]
+source_file="res://weapons/ump 45/things/untitled_material_1_normal.png"
+dest_files=["res://.godot/imported/untitled_material_1_normal.png-e7f86713e02fd8b38a7b28fc037b6393.s3tc.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://weapons/ump 45/things/untitled_material_normal.png"
+roughness/src_normal="res://weapons/ump 45/things/untitled_material_1_normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
