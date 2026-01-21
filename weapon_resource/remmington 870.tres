@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("1_vskq5")
 weapon_name = "Remmington 870"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10

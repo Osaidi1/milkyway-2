@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://btgwlvy07m62p"]
+
+[ext_resource type="ArrayMesh" uid="uid://bgi7673mw3cmy" path="res://weapons/aug/aug.tres" id="1_7qtei"]
+
+[node name="untitled" type="Node3D"]
+
+[node name="Cylinder_006_Material_009_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 3.7225e-08, -0.178438, 0.178438, -1.59536e-08, -3.32817e-15, -1.59536e-08, -0.178438, -3.7225e-08, 4.32701, 4.3208, 9.5941e-14)
+mesh = ExtResource("1_7qtei")
+skeleton = NodePath("")
