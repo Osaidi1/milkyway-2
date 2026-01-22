@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_tv0y6")
 weapon_name = "Scar-H"
+tier_number = 11
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -22,13 +23,13 @@ camera_speed_rotation = 0.1
 camera_amount_position = 0.1
 camera_amount_rotation = 30.0
 idle_amount = 10.0
-idle_strength = 300.0
+idle_strength = 400.0
 idle_random_amount = 5.0
-rotate_recoil_amount = Vector3(0, 0, 0)
-rotate_snap = 0.0
-rotate_speed = 0.0
-position_recoil_amount = Vector3(0, 0, 0)
-position_snap = 0.0
+rotate_recoil_amount = Vector3(0.025, 0.01, 0.01)
+rotate_snap = 15.0
+rotate_speed = 10.0
+position_recoil_amount = Vector3(0.01, 0.01, 0.05)
+position_snap = 20.0
 position_speed = 0.0
 flash_time = 0.85
 muzzle_position = Vector3(0, -0.697661, 0.102124)

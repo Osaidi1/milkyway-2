@@ -63,24 +63,21 @@ func _input(event: InputEvent) -> void:
 		weapon = load("res://weapon_resource/mp5.tres")
 		load_weapon()
 	if event.is_action_pressed("7"):
-		weapon = load("res://weapon_resource/remmington 870.tres")
-		load_weapon()
-	if event.is_action_pressed("8"):
 		weapon = load("res://weapon_resource/p90.tres")
 		load_weapon()
-	if event.is_action_pressed("9"):
+	if event.is_action_pressed("8"):
 		weapon = load("res://weapon_resource/famas.tres")
 		load_weapon()
-	if event.is_action_pressed("10"):
+	if event.is_action_pressed("9"):
 		weapon = load("res://weapon_resource/ak47.tres")
 		load_weapon()
-	if event.is_action_pressed("11"):
+	if event.is_action_pressed("10"):
 		weapon = load("res://weapon_resource/aug.tres")
 		load_weapon()
-	if event.is_action_pressed("12"):
+	if event.is_action_pressed("11"):
 		weapon = load("res://weapon_resource/scar-h.tres")
 		load_weapon()
-	if event.is_action_pressed("13"):
+	if event.is_action_pressed("12"):
 		weapon = load("res://weapon_resource/m4a1.tres")
 		load_weapon()
 	if event.is_action_pressed("reload"):

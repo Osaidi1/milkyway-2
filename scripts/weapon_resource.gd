@@ -3,6 +3,7 @@ extends Resource
 
 @export var weapon_name: String
 @export_category("Data")
+@export var tier_number := 1
 @export var bullet_delay := 0.1
 @export var shoot_range := 1000
 @export var single_damage := 10

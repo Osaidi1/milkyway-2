@@ -1,13 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://dkrvx17yiafo1"]
+[gd_scene load_steps=20 format=3 uid="uid://dkrvx17yiafo1"]
 
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://gtpwf5x6m0aj" path="res://scripts/recoil.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://b8alqou5nifwa" path="res://scripts/recoil_position.gd" id="3_fjrip"]
-[ext_resource type="ArrayMesh" uid="uid://c10wrpawur7nd" path="res://weapons/mp5/mp5.tres" id="5_ur7pv"]
 [ext_resource type="FontFile" uid="uid://dkke0ijdtyul1" path="res://assets/Font.ttf" id="6_tuyoq"]
-[ext_resource type="Resource" uid="uid://cwdq3u4xkjbno" path="res://weapon_resource/mp5.tres" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cl505e4bbokab" path="res://assets/bars_outline.png" id="7_fjrip"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
@@ -157,10 +155,8 @@ script = ExtResource("3_fjrip")
 
 [node name="Weapons" parent="Head/Recoil/Camera/RecoilPosition" instance=ExtResource("2_qhqgy")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = ExtResource("5_ur7pv")
+transform = Transform3D(-0.00492401, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994522, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
 skeleton = NodePath("../..")
-weapon = ExtResource("6_y4r1p")
 sway_speed = 1.0
 
 [node name="Animations" type="AnimationPlayer" parent="."]

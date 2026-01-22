@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_ngwdj")
 weapon_name = "AK47"
+tier_number = 9
 bullet_delay = 0.2
 shoot_range = 150
 single_damage = 10
@@ -22,7 +23,7 @@ camera_speed_rotation = 0.1
 camera_amount_position = 0.05
 camera_amount_rotation = 21.1
 idle_amount = 35.0
-idle_strength = 250.0
+idle_strength = 150.0
 idle_random_amount = 2.5
 rotate_recoil_amount = Vector3(0.05, 0.01, 0.01)
 rotate_snap = 15.0

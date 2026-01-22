@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_3og5e")
 weapon_name = "UMP 45"
+tier_number = 5
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -24,12 +25,12 @@ camera_amount_rotation = 30.0
 idle_amount = 10.0
 idle_strength = 300.0
 idle_random_amount = 5.0
-rotate_recoil_amount = Vector3(0, 0, 0)
-rotate_snap = 0.0
-rotate_speed = 0.0
-position_recoil_amount = Vector3(0, 0, 0)
-position_snap = 0.0
-position_speed = 0.0
+rotate_recoil_amount = Vector3(0.032, 0.015, 0.015)
+rotate_snap = 15.0
+rotate_speed = 10.0
+position_recoil_amount = Vector3(0.01, 0.01, 0.02)
+position_snap = 20.0
+position_speed = 10.0
 flash_time = 0.85
 muzzle_position = Vector3(0, 0.360011, 0.0932674)
 mesh_scene = ExtResource("1_2cgf7")
