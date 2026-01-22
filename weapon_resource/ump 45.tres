@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="weapons_resource" load_steps=2 format=3 uid="uid://carq8emkrrptd"]
+[gd_resource type="Resource" script_class="weapons_resource" load_steps=3 format=3 uid="uid://carq8emkrrptd"]
 
+[ext_resource type="ArrayMesh" uid="uid://crapyeilwb4ra" path="res://weapons/ump 45/ump 45.tres" id="1_2cgf7"]
 [ext_resource type="Script" uid="uid://d23t6hf6wbf62" path="res://scripts/weapon_resource.gd" id="1_3og5e"]
 
 [resource]
 script = ExtResource("1_3og5e")
 weapon_name = "UMP 45"
-meele = false
 bullet_delay = 0.1
 shoot_range = 1000
 single_damage = 10
@@ -13,8 +13,8 @@ magazine_size = 20
 max_ammo = 350
 start_ammo = 150
 reload_time = 2
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
+position = Vector3(0.095, -0.165, -0.195)
+rotation = Vector3(-78, -90, 90)
 camera_min = Vector2(-20, -20)
 camera_max = Vector2(20, 20)
 camera_speed_position = 0.07
@@ -31,5 +31,6 @@ position_recoil_amount = Vector3(0, 0, 0)
 position_snap = 0.0
 position_speed = 0.0
 flash_time = 0.85
-muzzle_position = Vector3(0, 0, 0)
+muzzle_position = Vector3(0, 0.360011, 0.0932674)
+mesh_scene = ExtResource("1_2cgf7")
 metadata/_custom_type_script = "uid://d23t6hf6wbf62"
