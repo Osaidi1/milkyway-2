@@ -5,13 +5,13 @@ extends Resource
 @export_category("Data")
 @export var tier_number := 1
 @export var bullet_delay := 0.1
+@export var single_damage := 10.0
 @export var shoot_range := 1000
-@export var single_damage := 10
 @export_category("Bullets")
 @export var magazine_size := 20
-@export var max_ammo := 350
 @export var start_ammo := 150
-@export var reload_time := 2
+@export var max_ammo := 350
+@export var reload_time := 2.0
 @export_category("Orientation")
 @export var position: Vector3
 @export var rotation: Vector3
