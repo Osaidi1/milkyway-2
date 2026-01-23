@@ -47,6 +47,7 @@ var current_stamina := 0
 var stamina_drain := 0.1
 var stamina_regen := 75
 var is_regening := false
+var wave_num := 1
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -111,6 +112,8 @@ func _physics_process(delta: float) -> void:
 	fov(delta)
 	
 	add_gravity(delta)
+	
+	weapon_set()
 	
 	camera_tilt(delta)
 	
@@ -240,7 +243,6 @@ func die() -> void:
 	animations.play("die")
 
 func take_damage(damage) -> void:
-	var prev_health = current_health
 	current_health -= damage
 	current_health = clamp(current_health, 0, HEALTH)
 	health.value = current_health
@@ -251,3 +253,53 @@ func take_damage(damage) -> void:
 
 func _on_stamina_regen_wait_timeout() -> void:
 	is_regening = true
+
+func weapon_set() -> void:
+	if wave_num == 1 and !weapons.weapon == load("res://weapon_resource/glock_18.tres"):
+		weapons.weapon = load("res://weapon_resource/glock_18.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 12
+	if wave_num == 2 and !weapons.weapon == load("res://weapon_resource/five seven.tres"):
+		weapons.weapon = load("res://weapon_resource/five seven.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 15
+	if wave_num == 3 and !weapons.weapon == load("res://weapon_resource/tec 9.tres"):
+		weapons.weapon = load("res://weapon_resource/tec 9.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 16
+	if wave_num == 4 and !weapons.weapon == load("res://weapon_resource/mac10.tres"):
+		weapons.weapon = load("res://weapon_resource/mac10.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 17
+	if wave_num == 5 and !weapons.weapon == load("res://weapon_resource/ump 45.tres"):
+		weapons.weapon = load("res://weapon_resource/ump 45.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 22
+	if wave_num == 6 and !weapons.weapon == load("res://weapon_resource/mp5.tres"):
+		weapons.weapon = load("res://weapon_resource/mp5.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 24
+	if wave_num == 7 and !weapons.weapon == load("res://weapon_resource/p90.tres"):
+		weapons.weapon = load("res://weapon_resource/p90.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 26
+	if wave_num == 8 and !weapons.weapon == load("res://weapon_resource/famas.tres"):
+		weapons.weapon = load("res://weapon_resource/famas.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 32
+	if wave_num == 9 and !weapons.weapon == load("res://weapon_resource/ak47.tres"):
+		weapons.weapon = load("res://weapon_resource/ak47.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 36
+	if wave_num == 10 and !weapons.weapon == load("res://weapon_resource/aug.tres"):
+		weapons.weapon = load("res://weapon_resource/aug.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 41
+	if wave_num == 11 and !weapons.weapon == load("res://weapon_resource/scar-h.tres"):
+		weapons.weapon = load("res://weapon_resource/scar-h.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 46
+	if wave_num == 12 and !weapons.weapon == load("res://weapon_resource/m4a1.tres"):
+		weapons.weapon = load("res://weapon_resource/m4a1.tres")
+		weapons.load_weapon()
+		Variables.zombie_health = 55

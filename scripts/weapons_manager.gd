@@ -44,42 +44,6 @@ func _ready() -> void:
 	total_ammo_count = weapon.start_ammo - magazine_count
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("1"):
-		weapon = load("res://weapon_resource/glock_18.tres")
-		load_weapon()
-	if event.is_action_pressed("2"):
-		weapon = load("res://weapon_resource/five seven.tres")
-		load_weapon()
-	if event.is_action_pressed("3"):
-		weapon = load("res://weapon_resource/tec 9.tres")
-		load_weapon()
-	if event.is_action_pressed("4"):
-		weapon = load("res://weapon_resource/mac10.tres")
-		load_weapon()
-	if event.is_action_pressed("5"):
-		weapon = load("res://weapon_resource/ump 45.tres")
-		load_weapon()
-	if event.is_action_pressed("6"):
-		weapon = load("res://weapon_resource/mp5.tres")
-		load_weapon()
-	if event.is_action_pressed("7"):
-		weapon = load("res://weapon_resource/p90.tres")
-		load_weapon()
-	if event.is_action_pressed("8"):
-		weapon = load("res://weapon_resource/famas.tres")
-		load_weapon()
-	if event.is_action_pressed("9"):
-		weapon = load("res://weapon_resource/ak47.tres")
-		load_weapon()
-	if event.is_action_pressed("10"):
-		weapon = load("res://weapon_resource/aug.tres")
-		load_weapon()
-	if event.is_action_pressed("11"):
-		weapon = load("res://weapon_resource/scar-h.tres")
-		load_weapon()
-	if event.is_action_pressed("12"):
-		weapon = load("res://weapon_resource/m4a1.tres")
-		load_weapon()
 	if event.is_action_pressed("reload"):
 		reload()
 	if event is InputEventMouseMotion:
@@ -171,7 +135,6 @@ func shoot() -> void:
 		query.collision_mask = 2
 		query.exclude = [player]
 		var result: Dictionary = space_state.intersect_ray(query)
-		print(result)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
 		if not result.is_empty():

@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4aremvvkmjl8"]
+
+[ext_resource type="PackedScene" uid="uid://dkrvx17yiafo1" path="res://scenes/player.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://cmvxgkg80elj2" path="res://scenes/zombie.tscn" id="2_rwgxs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5uuo"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_nnsk1"]
+sky_material = SubResource("ProceduralSkyMaterial_e5uuo")
+
+[sub_resource type="Environment" id="Environment_rwgxs"]
+background_mode = 2
+sky = SubResource("Sky_nnsk1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
+vertices = PackedVector3Array(-60.1055, 0.495, -60.1055, -60.1055, 0.495, 60.1445, 60.1445, 0.495, 60.1445, 60.1445, 0.495, -60.1055)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
+albedo_color = Color(0.233925, 0.233925, 0.233925, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.889581, -0.0745013, 0.450662, 0.311835, 0.621879, 0.718349, -0.333775, 0.779561, -0.52998, 15.4977, 19.1556, -16.3855)
+shadow_enabled = true
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rwgxs")
+
+[node name="Navigation" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.86711, 0)
+navigation_mesh = SubResource("NavigationMesh_rwgxs")
+
+[node name="Floor" type="CSGBox3D" parent="Navigation"]
+transform = Transform3D(24.2422, 0, 0, 0, 1, 0, 0, 0, 24.2422, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_e5uuo")
+use_collision = true
+collision_layer = 3
+size = Vector3(5, 0.01, 5)
+
+[node name="Zombie" parent="." instance=ExtResource("2_rwgxs")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -9.10439, -4.55208, -9.98574)
+
+[node name="Player" parent="." instance=ExtResource("2_4wyf3")]
+HEALTH = null
+STAMINA = null
+WALK_SPEED = null
+RUN_SPEED = null
+JUMP_VELOCITY = null
+SENSITIVITY = null
+BOB_FREQUENCY = null
+BOB_DISTANCE = null
+FOV = null
+INTERACT_DISTANCE = null
+SIDEWAYS_TILT = null
+FALL_TILT_TIME = null
+FALL_THRESHOLD = null
+WEAPON_BOB_H = null
+WEAPON_BOB_V = null

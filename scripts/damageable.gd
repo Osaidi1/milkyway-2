@@ -1,12 +1,8 @@
 class_name damageable
 extends CharacterBody3D
 
-@export var health: float = 30
 var old_health := 0.0
-var current_health: float = health
-
-func _ready() -> void:
-	current_health = health
+var current_health := 0
 
 func take_damage(damage: float) -> void:
 	old_health = current_health

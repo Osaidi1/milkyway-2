@@ -24,6 +24,7 @@ var is_dead := false
 var knockback_velocity := Vector3.ZERO
 
 func _ready() -> void:
+	current_health = Variables.zombie_health
 	state_machine = anim_flow.get("parameters/playback")
 	armature.visible = true
 
