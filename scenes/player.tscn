@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkrvx17yiafo1"]
+[gd_scene load_steps=22 format=3 uid="uid://dkrvx17yiafo1"]
 
 [ext_resource type="Script" uid="uid://b10pd6iw5nydq" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cmhyvrtry587" path="res://scripts/crosshair_container.gd" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://dxm16fl2emhyy" path="res://scenes/weapons.tscn" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://gtpwf5x6m0aj" path="res://scripts/recoil.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://b8alqou5nifwa" path="res://scripts/recoil_position.gd" id="3_fjrip"]
+[ext_resource type="ArrayMesh" uid="uid://bo64yio3vun3c" path="res://weapons/glock 18/glock18.tres" id="5_ur7pv"]
 [ext_resource type="FontFile" uid="uid://dkke0ijdtyul1" path="res://assets/Font.ttf" id="6_tuyoq"]
+[ext_resource type="Resource" uid="uid://dovd1ytg1cd4l" path="res://weapon_resource/glock_18.tres" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cl505e4bbokab" path="res://assets/bars_outline.png" id="7_fjrip"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
@@ -155,8 +157,10 @@ script = ExtResource("3_fjrip")
 
 [node name="Weapons" parent="Head/Recoil/Camera/RecoilPosition" instance=ExtResource("2_qhqgy")]
 unique_name_in_owner = true
-transform = Transform3D(-0.00492401, -0.0468484, 0.99889, 0.104412, 0.993418, 0.0471065, -0.994522, 0.104528, -4.36629e-08, 0.11, -0.115, -0.149)
+transform = Transform3D(-0.0983097, -0.0635641, 0.993124, 0.155952, 0.984644, 0.0784591, -0.98286, 0.162593, -0.0868871, 0.085, -0.09, -0.175)
+mesh = ExtResource("5_ur7pv")
 skeleton = NodePath("../..")
+weapon = ExtResource("6_y4r1p")
 sway_speed = 1.0
 
 [node name="Animations" type="AnimationPlayer" parent="."]
@@ -328,6 +332,18 @@ offset_bottom = 19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fjrip")
 theme_override_styles/fill = SubResource("StyleBoxFlat_smehm")
 max_value = 1000.0
+value = 100.0
 show_percentage = false
+
+[node name="Up" type="ColorRect" parent="HUD"]
+offset_right = 1920.0
+offset_bottom = 210.0
+color = Color(0, 0, 0, 1)
+
+[node name="Down" type="ColorRect" parent="HUD"]
+offset_top = 869.0
+offset_right = 1920.0
+offset_bottom = 1079.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="timeout" from="HUD/Stamina/Stamina Regen Wait" to="." method="_on_stamina_regen_wait_timeout"]

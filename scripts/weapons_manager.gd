@@ -44,12 +44,14 @@ func _ready() -> void:
 	total_ammo_count = weapon.start_ammo - magazine_count
 
 func _input(event: InputEvent) -> void:
+	if !player.can_control: return
 	if event.is_action_pressed("reload"):
 		reload()
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
 func _physics_process(_delta: float) -> void:
+	if !player.can_control: return
 	delay.wait_time = weapon.bullet_delay
 	if delay.is_stopped() :
 		if Engine.is_editor_hint():

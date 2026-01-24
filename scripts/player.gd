@@ -18,7 +18,8 @@ extends CharacterBody3D
 @export_category("Weapon")
 @export var WEAPON_BOB_H := 1
 @export var WEAPON_BOB_V := 4
-@export_category("Refrences")
+@export_category("Others")
+@export var can_control := false
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Recoil/Camera
@@ -32,6 +33,7 @@ extends CharacterBody3D
 @onready var stamina: ProgressBar = $HUD/Stamina/Stamina
 @onready var health_underlay: ProgressBar = $HUD/Health/HealthUnderlay
 @onready var stamina_regen_wait: Timer = $"HUD/Stamina/Stamina Regen Wait"
+@onready var gate_anims: AnimationPlayer = $"../Navigation/Wall/gate/AnimationPlayer"
 
 var speed := 0.0
 var time_bob := 0.0
@@ -50,6 +52,7 @@ var is_regening := false
 var wave_num := 1
 
 func _ready() -> void:
+	position = Vector3(16, -5, 5)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crouch_check.add_exception($".")
 	current_health = HEALTH
@@ -58,12 +61,13 @@ func _ready() -> void:
 	stamina.max_value = STAMINA
 
 func _input(event: InputEvent) -> void:
+	if !can_control: return
 	if is_dead: return
 	if event.is_action_pressed("interact"):
 		interact()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_dead: return
+	if is_dead or !can_control: return
 	# Jump
 	if event.is_action_pressed("jump") and !is_crouching:
 		jump()
@@ -73,7 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		crouch()
 	
 	# Rotate Camera
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and can_control:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70), deg_to_rad(60))
@@ -146,6 +150,7 @@ func crouch() -> void:
 		is_crouching = !is_crouching
 
 func change_speed(delta) -> void:
+	if !can_control: return
 	if Input.is_action_pressed("run") and current_stamina > 0:
 		is_regening = false
 		speed = RUN_SPEED
@@ -198,6 +203,7 @@ func interact_cast():
 	interact_cast_result = current_cast_result
 
 func camera_tilt(delta) -> void:
+	if !can_control: return
 	if is_dead: return
 	var angles := camera.rotation
 	var offset := Vector3.ZERO
@@ -303,3 +309,6 @@ func weapon_set() -> void:
 		weapons.weapon = load("res://weapon_resource/m4a1.tres")
 		weapons.load_weapon()
 		Variables.zombie_health = 55
+
+func intro_method() -> void:
+	gate_anims.play_backwards("close")

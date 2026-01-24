@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://duyo7qgaqq7ok"
+path="res://.godot/imported/gate sound.mp3-9b4e35d85acb0fc4137455c2d6680340.mp3str"
+
+[deps]
+
+source_file="res://assets/gate sound.mp3"
+dest_files=["res://.godot/imported/gate sound.mp3-9b4e35d85acb0fc4137455c2d6680340.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
