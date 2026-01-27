@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://q5uj8bif0ybl"]
+[gd_scene load_steps=6 format=4 uid="uid://q5uj8bif0ybl"]
 
 [ext_resource type="Texture2D" uid="uid://b56w81jclikaf" path="res://assets/map/decor pack_Park_Bench_Metal_01.png" id="1_jbn6c"]
 
@@ -39,7 +39,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xuygr")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jbn6c"]
+points = PackedVector3Array(1.6, 0.8, -0.700137, 1.6, 0.699961, -0.000136971, 1.6, 0.8, -0.800039, -1.6, 0.8, -0.700137, 1.6, -0.500098, -0.000136971, -1.6, 0.699961, -0.000136971, 1.6, 0.699961, -0.900078, -1.6, 0.8, -0.800039, 1.6, -0.6, -1.20006, -1.6, -0.500098, -0.000136971, 1.6, -0.500098, -1.4, -1.6, 0.699961, -0.900078, 1.6, -0.6, -1.4, -1.6, -0.6, -1.20006, -1.6, -0.500098, -1.4, -1.6, -0.6, -1.4)
+
 [node name="Untitled" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4.48089, 0, 0)
 mesh = SubResource("ArrayMesh_7ft8n")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_jbn6c")

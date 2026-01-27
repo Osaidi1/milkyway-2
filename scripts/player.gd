@@ -33,7 +33,7 @@ extends CharacterBody3D
 @onready var stamina: ProgressBar = $HUD/Stamina/Stamina
 @onready var health_underlay: ProgressBar = $HUD/Health/HealthUnderlay
 @onready var stamina_regen_wait: Timer = $"HUD/Stamina/Stamina Regen Wait"
-@onready var gate_anims: AnimationPlayer = $"../Navigation/Wall/gate/AnimationPlayer"
+@onready var gate_anims: AnimationPlayer = $"../Navigation/Wall/Gate/AnimationPlayer"
 
 var speed := 0.0
 var time_bob := 0.0
@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle Movement
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (head.transform.basis * Vector3(input_dir.x, 0, -input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
 			weapons.weapon_bob(delta, speed, WEAPON_BOB_H * (speed / 1.5), WEAPON_BOB_V)
@@ -312,3 +312,6 @@ func weapon_set() -> void:
 
 func intro_method() -> void:
 	gate_anims.play_backwards("close")
+
+func remove_velo_aftet_cut() -> void:
+	velocity.y = 0

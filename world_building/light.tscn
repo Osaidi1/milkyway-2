@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://2ad2imtifo3b"]
+[gd_scene load_steps=6 format=4 uid="uid://2ad2imtifo3b"]
 
 [ext_resource type="Texture2D" uid="uid://5k5nnplhbfh8" path="res://assets/map/decor pack_Park_Lamp_3Tall.png" id="1_0m35s"]
 
@@ -39,6 +39,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_f4fuf")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0m35s"]
+points = PackedVector3Array(0.2, 0.0999608, 0, 0.0999608, 0.2, 0, 0.2, -0.20001, 0, 0.2, 0.0999608, -3.90016, -0.20001, 0.2, 0, 0.0999608, 0.2, -3.90016, 0.0999608, -0.3, 0, 0.2, -0.20001, -3.90016, 0.0999608, -2.93851e-05, -4, -0.3, 0.0999608, 0, -0.20001, 0.2, -3.90016, -2.93851e-05, 0.0999608, -4, -0.20001, -0.3, 0, 0.0999608, -0.3, -3.90016, -2.93851e-05, -0.20001, -4, 0.0999608, -0.10002, -4, -0.3, -0.20001, 0, -0.3, 0.0999608, -3.90016, -0.10002, 0.0999608, -4, -0.20001, -2.93851e-05, -4, -0.20001, -0.3, -3.90016, -0.10002, -0.20001, -4, -0.3, -0.20001, -3.90016, -0.20001, -0.10002, -4)
+
 [node name="Untitled_013" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_0sncv")
@@ -46,4 +49,15 @@ skeleton = NodePath("")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0723917, -3.65735)
-light_color = Color(1, 1, 0, 1)
+light_color = Color(0.960218, 0.974526, 0.822146, 1)
+light_energy = 3.0
+light_indirect_energy = 3.0
+light_volumetric_fog_energy = 3.0
+light_size = 1.0
+omni_range = 10.0
+omni_attenuation = 2.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0m35s")
